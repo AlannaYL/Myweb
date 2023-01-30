@@ -19,6 +19,10 @@ const listSchema = new Schema({
     type: ObjectId,
     ref: 'products',
     required: [true, '缺少商品']
+  },
+  like: {
+    type: Boolean,
+    default: false
   }
 })
 

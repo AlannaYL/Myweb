@@ -6,8 +6,8 @@
   "author": "Alanna <a04810254@gmail.com>",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "dev": "quasar dev",
+    "build": "quasar build"
   },
   "dependencies": {
     "axios": "^0.21.1",
