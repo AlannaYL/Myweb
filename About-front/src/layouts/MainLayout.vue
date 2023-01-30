@@ -1,22 +1,16 @@
 
-<template>
-  <div>
-    <q-layout view="lHh lpr lFf"  class="shadow-2 rounded-borders">
-      <q-header reveal>
-        <q-toolbar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          <q-toolbar-title>Happy</q-toolbar-title>
-          <q-btn flat round dense icon="menu" class="q-mr-sm" />
-        </q-toolbar>
-      </q-header>
-
-      <q-page-container>
-        <q-page>
-          <router-view />
-        </q-page>
-      </q-page-container>
-    </q-layout>
-  </div>
+<template lang="pug">
+div
+  q-layout.shadow-2(view='hHr lpR fFr' rounded-borders)
+    q-header.bg-white.text-black(reveal)
+      q-toolbar
+        q-avatar
+        q-toolbar-title 快樂100%
+        .q-gutter-x-md
+          q-btn(icon='search' push round color="white" text-color="black")
+          q-btn(icon='face' push round color="white" text-color="black")
+          q-btn(icon='menu' push round color="white" text-color="black")
+    q-page-container
+      q-page
+        router-view
 </template>
