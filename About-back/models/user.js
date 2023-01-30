@@ -14,7 +14,15 @@ const cartSchema = new Schema({
   }
 })
 
-const Userschema = new Schema({
+const listSchema = new Schema({
+  p_id: {
+    type: ObjectId,
+    ref: 'products',
+    required: [true, '缺少商品']
+  }
+})
+
+const schema = new Schema({
   account: {
     type: String,
     required: [true, '缺少帳號'],
@@ -24,7 +32,7 @@ const Userschema = new Schema({
     match: [/^[A-Za-z0-9]+$/, '帳號只能是英文數字'],
     trim: true
   },
-  passport: {
+  password: {
     type: String,
     require: true
   },
@@ -53,15 +61,43 @@ const Userschema = new Schema({
     type: [cartSchema],
     default: []
   },
+  list: {
+    type: [listSchema],
+    default: []
+  },
   role: {
     type: Boolean,
     default: false
   }
 }, { versionKey: false })
 
-Userschema.pre('save', function (next) {
-  // this 代表正要保存的資料
+schema.pre('save', function (next) {
   const user = this
+  if (user.isModified('password')) {
+    if (user.password.length >= 4 && user.password.length <= 20) {
+      user.password = bcrypt.hashSync(user.password, 10)
+    } else {
+      const error = new Error.ValidationError(null)
+      error.addError('passport', new Error.ValidatorError({ message: '密碼長度錯誤' }))
+      next(error)
+      return
+    }
+  }
   next()
 })
-export default model('users', Userschema)
+
+schema.pre('findOneAndUpdate', function (next) {
+  const user = this._update
+  if (user.password) {
+    if (user.password.length >= 4 && user.password.lemgth <= 20) {
+      user.password = bcrypt.hashSync(user.password, 10)
+    } else {
+      const error = new Error.ValidationError(null)
+      error.addError('passport', new Error.ValidatorError({ message: '密碼長度錯誤' }))
+      next(error)
+      return
+    }
+  }
+  next()
+})
+export default model('users', schema)
