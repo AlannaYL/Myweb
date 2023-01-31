@@ -5,7 +5,7 @@ import cors from 'cors'
 import userRoute from './routes/users.js'
 
 mongoose.connect(process.env.DB_URL)
-mongoose.set('sanitizaFilter', true)
+mongoose.set('sanitizeFilter', true)
 
 const app = express()
 

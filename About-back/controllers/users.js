@@ -16,6 +16,7 @@ export const register = async (req, res) => {
     } else if (error.name === 'MongoSeverError' && error.code === 11000) {
       res.status(409).json({ success: false, message: '帳號已使用' })
     } else {
+      console.log(error)
       res.status(500).json({ success: false, message: '未知錯誤' })
     }
   }

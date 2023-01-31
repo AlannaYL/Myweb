@@ -54,8 +54,9 @@ const register = async () => {
     $q.notify({
       message: '註冊失敗',
       caption: error?.response?.data?.message || '發生錯誤',
-      color: '#F8A680'
+      color: 'pink'
     })
+    console.log(error)
   }
   loading.value = false
 }
