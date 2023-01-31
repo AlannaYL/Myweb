@@ -8,9 +8,19 @@ div
         q-toolbar-title 快樂100%
         .q-gutter-x-md
           q-btn(icon='search' push round color="white" text-color="black")
-          q-btn(icon='face' push round color="white" text-color="black")
+          q-btn(icon='face' @click="register = true" push round color="white" text-color="black")
           q-btn(icon='menu' push round color="white" text-color="black")
     q-page-container
       q-page
         router-view
+    q-dialog(v-model="register")
+      RegisterModal
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import RegisterModal from 'components/RegisterModal.vue'
+
+const register = ref(false)
+
+</script>

@@ -4,7 +4,26 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      {
+        path: '',
+        name: 'home',
+        component: () => import('pages/IndexPage.vue'),
+        meta: {
+          title: 'About',
+          login: false,
+          admin: false
+        }
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('pages/RegisterPage.vue'),
+        meta: {
+          title: 'About | 註冊',
+          login: false,
+          admin: false
+        }
+      }
     ]
   },
   // Always leave this as last one,
