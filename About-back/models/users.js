@@ -14,15 +14,11 @@ const cartSchema = new Schema({
   }
 })
 
-const listSchema = new Schema({
+const favoritesSchema = new Schema({
   p_id: {
     type: ObjectId,
     ref: 'products',
     required: [true, '缺少商品']
-  },
-  like: {
-    type: Boolean,
-    default: false
   }
 })
 
@@ -65,8 +61,8 @@ const schema = new Schema({
     type: [cartSchema],
     default: []
   },
-  list: {
-    type: [listSchema],
+  favorites: {
+    type: [favoritesSchema],
     default: []
   },
   role: {
