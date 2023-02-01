@@ -12,7 +12,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import validator from 'validator'
-import { api } from 'boot/axios.js'
+import { api } from 'boot/axios'
 import { useQuasar } from 'quasar'
 
 const showRegister = ref(false)

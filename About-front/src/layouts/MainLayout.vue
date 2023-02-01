@@ -5,7 +5,7 @@
     q-header.bg-white.text-black(reveal)
       q-toolbar
         q-avatar
-        q-toolbar-title 快樂100%
+        q-toolbar-title 我沒有快樂
         .q-gutter-x-md
           q-btn(icon='face' @click="ShowLogin = true" push round color="white" text-color="black")
           q-btn(icon='search' push round color="white" text-color="black")

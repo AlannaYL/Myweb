@@ -49,8 +49,6 @@ const schema = new Schema({
   },
   phone: {
     type: String,
-    required: [false],
-    default: [],
     match: [/^[0-9]{10}$/, '電話只能是數字']
   },
   tokens: {

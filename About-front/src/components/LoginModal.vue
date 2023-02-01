@@ -1,7 +1,7 @@
 <template lang="pug">
 #Login
   q-card-section.items-end
-    q-form(@submit="register").q-gutter-md
+    q-form(@submit="login").q-gutter-md
       q-input(outlined v-model="form.account" :rules="[rules.account,rules.length]" label-color="blue" color="grey-3" placeholder="輸入帳號")
       q-input(outlined type="password" v-model="form.password" :rules="[rules.password,rules.length]" label-color="blue" color="grey-3" placeholder="輸入密碼")
       .col-12.text-center.q-gutter-sm
@@ -9,11 +9,10 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-import validator from 'validator'
-import { api } from 'boot/axios.js'
 import { useQuasar } from 'quasar'
+import { useUserStore } from 'src/stores/users'
 
-const user = ref(false)
+const user = useUserStore()
 
 const loading = ref(false)
 const form = reactive({
@@ -37,7 +36,7 @@ const rules = {
 
 const login = async () => {
   loading.value = true
-  await user.value.login(form)
+  await user.login(form)
   loading.value = false
 }
 </script>
