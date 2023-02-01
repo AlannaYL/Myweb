@@ -45,9 +45,13 @@ const routes = [
         },
         children: [
           {
-            path: '',
-            name: '',
-            component: () => import('src/pages/ExhibitionPage.vue')
+            path: '/Add',
+            name: 'Add',
+            component: () => import('src/pages/AddPage.vue'),
+            meta: {
+              login: true,
+              admin: true
+            }
           }
         ]
       }
