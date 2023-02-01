@@ -17,7 +17,7 @@ const routes = [
       {
         path: 'Member',
         name: 'Member',
-        component: () => import('src/pages/MemberPage.vue'),
+        component: () => import('src/pages/front/MemberPage.vue'),
         meta: {
           title: '會員服務',
           login: true,
@@ -27,7 +27,7 @@ const routes = [
       {
         path: 'About',
         name: 'About',
-        component: () => import('src/pages/AboutPage.vue'),
+        component: () => import('src/pages/front/AboutPage.vue'),
         meta: {
           title: '關於我們',
           login: false,
@@ -37,7 +37,7 @@ const routes = [
       {
         path: 'Admin',
         name: 'Admin',
-        component: () => import('src/pages/AdminPage.vue'),
+        component: () => import('src/pages/admin/AdminPage.vue'),
         meta: {
           title: '後台管理',
           login: true,
@@ -47,7 +47,7 @@ const routes = [
           {
             path: '/Add',
             name: 'Add',
-            component: () => import('src/pages/AddPage.vue'),
+            component: () => import('src/pages/admin/AddPage.vue'),
             meta: {
               login: true,
               admin: true

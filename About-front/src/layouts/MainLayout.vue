@@ -5,15 +5,16 @@
     q-header.bg-white.text-black(reveal)
       q-toolbar
         q-avatar
-        q-toolbar-title 我沒有快樂
+        q-toolbar-title 我不可愛
         .q-gutter-x-md
-          q-btn(icon='face' @click="ShowLogin = true" push round color="white" text-color="black")
+          q-btn(v-if="isLogin" @click="logout" icon='fa-solid fa-person-through-window' push round color="white" text-color="black")
+          q-btn(v-if="!isLogin" icon='face' @click="ShowLogin = true" push round color="white" text-color="black")
           q-btn(icon='search' push round color="white" text-color="black")
           q-btn(icon='menu' push round color="white" text-color="black")
     q-page-container
       q-page
         router-view
-    q-dialog(v-model="ShowLogin")
+    q-dialog(v-if="!isLogin" v-model="ShowLogin")
       q-card#card.row.items-end
         .col-12
           RegisterModal(v-if="showRegister")
@@ -24,10 +25,16 @@
 
 <script setup>
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from 'src/stores/users'
 import RegisterModal from 'components/RegisterModal.vue'
 import LoginModal from 'components/LoginModal.vue'
 
 const ShowLogin = ref(false)
 const showRegister = ref(false)
 
+const user = useUserStore()
+const { isLogin, isAdmin } = storeToRefs(user)
+console.log(isLogin)
+const { logout } = user
 </script>
