@@ -1,14 +1,12 @@
 <template lang="pug">
-q-card(style="width: 30%;max-width: 33.3%")
-  q-card-section.row.items-center.q-pb-none.text-center
-    .text-h5.col-12.text-pink 註冊
+#register
   q-card-section
     q-form(@submit="register").q-gutter-md
-      q-input(outlined v-model="form.account" :rules="[rules.required,rules.length]" label-color="blue" color="grey-3" label="早安你好你的帳號是?")
-      q-input(outlined v-model="form.email" type="email" :rules="[rules.email,rules.required]" label-color="blue" color="grey-3" label="早安你好你的信箱多少")
-      q-input(outlined type="password" v-model="form.password" :rules="[rules.required,rules.length]" label-color="blue" color="grey-3" label="早安你好你的密碼是?")
-      q-input(outlined type="password" v-model="form.passwordConfirm" :rules="[rules.required,rules.length, rules.passwordConfirm]" label-color="blue" color="grey-3" label="早安你好你的密碼在確認一下")
-      div.col-12.text-center.q-gutter-sm
+      q-input(outlined v-model="form.account" :rules="[rules.account,rules.length]" label-color="blue" color="grey-3" placeholder="輸入帳號")
+      q-input(outlined v-model="form.email" type="email" :rules="[rules.addemail,rules.email]" label-color="blue" color="grey-3" placeholder="輸入信箱")
+      q-input(outlined type="password" v-model="form.password" :rules="[rules.password,rules.length]" label-color="blue" color="grey-3" placeholder="輸入密碼")
+      q-input(outlined type="password" v-model="form.passwordConfirm" :rules="[rules.password,rules.length, rules.passwordConfirm]" label-color="blue" color="grey-3" placeholder="確認密碼")
+      .col-12.text-center.q-gutter-sm
         q-btn(label="成為會員" type="submit" push rounded color="pink" text-color="white" :loading="loading")
 </template>
 <script setup>
@@ -17,6 +15,7 @@ import validator from 'validator'
 import { api } from 'boot/axios.js'
 import { useQuasar } from 'quasar'
 
+const showRegister = ref(false)
 const loading = ref(false)
 const form = reactive({
   account: '',
@@ -31,11 +30,17 @@ const rules = {
   email (value) {
     return validator.isEmail(value) || '格式錯誤'
   },
-  required (value) {
-    return !!value || '欄位必填'
-  },
   length (value) {
     return (value.length >= 4 && value.length <= 20) || '長度必須為 4 ~ 20 個字'
+  },
+  account (value) {
+    return !!value || '帳號必填'
+  },
+  addemail (value) {
+    return !!value || '信箱必填'
+  },
+  password (value) {
+    return !!value || '密碼必填'
   },
   passwordConfirm (value) {
     return (value === form.password) || '密碼不一致'

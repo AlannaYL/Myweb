@@ -1,5 +1,5 @@
 import { route } from 'quasar/wrappers'
-import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
+import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory, START_LOCATION } from 'vue-router'
 import routes from './routes'
 
 /*
@@ -25,6 +25,26 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
+
+  Router.afterEach((to, from) => {
+    document.title = to.meta.title
+  })
+
+  // Router.beforeEach(async (to, from, next) => {
+  //   const user = useUserStore()
+  //   if (from === START_LOCATION) {
+  //     await useUserStore().gerUser()
+  //   }
+  //   if (user.isLogin && (to.path === '/register' || to.path === '/login')) {
+  //     next('/')
+  //   } else if (to.meta.login && !user.isLogin) {
+  //     next('/')
+  //   } else if (to.meta.admin && !user.isAdmin) {
+  //     next('/')
+  //   } else {
+  //     next()
+  //   }
+  // })
 
   return Router
 })
