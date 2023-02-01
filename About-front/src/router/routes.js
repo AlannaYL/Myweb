@@ -48,7 +48,6 @@ const routes = [
             path: '',
             name: '',
             component: () => import('src/pages/ExhibitionPage.vue')
-
           }
         ]
       }
