@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { api, apiAuth } from 'boot/axios'
 import { useQuasar } from 'quasar'
+import router from 'src/router'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref('')
