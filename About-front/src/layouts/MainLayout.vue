@@ -30,11 +30,9 @@ import { useUserStore } from 'src/stores/users'
 import RegisterModal from 'components/RegisterModal.vue'
 import LoginModal from 'components/LoginModal.vue'
 
-const ShowLogin = ref(false)
 const showRegister = ref(false)
 
 const user = useUserStore()
-const { isLogin, isAdmin } = storeToRefs(user)
-console.log(isLogin)
+const { isLogin, isAdmin, ShowLogin } = storeToRefs(user)
 const { logout } = user
 </script>

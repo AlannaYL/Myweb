@@ -10,6 +10,7 @@ export const useUserStore = defineStore('user', () => {
   const cart = ref(0)
   const role = ref(false)
   const $q = useQuasar()
+  const ShowLogin = ref(false)
 
   const isLogin = computed(() => {
     return token.value.length > 0
@@ -70,7 +71,8 @@ export const useUserStore = defineStore('user', () => {
     role,
     login,
     logout,
-    isLogin
+    isLogin,
+    ShowLogin
   }
 }, {
   persist: {
