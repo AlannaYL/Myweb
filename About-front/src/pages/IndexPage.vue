@@ -1,8 +1,8 @@
 <template lang="pug">
+#MySwiper
+  SwiperModal
 
 </template>
-
 <script setup>
-import { ref } from 'vue'
-
+import SwiperModal from 'src/components/SwiperModal.vue'
 </script>

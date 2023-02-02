@@ -9,8 +9,8 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-import { useQuasar } from 'quasar'
 import { useUserStore } from 'src/stores/users'
+import { Notify } from 'quasar'
 
 const user = useUserStore()
 
@@ -19,8 +19,6 @@ const form = reactive({
   account: '',
   password: ''
 })
-
-const $q = useQuasar()
 
 const rules = {
   length (value) {
@@ -34,9 +32,11 @@ const rules = {
   }
 }
 
+// const $q = useQuasar()
 const login = async () => {
   loading.value = true
   await user.login(form)
   loading.value = false
 }
+
 </script>

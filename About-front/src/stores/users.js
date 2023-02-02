@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { api, apiAuth } from 'boot/axios'
-import { useQuasar } from 'quasar'
+import { Notify } from 'quasar'
+import Swal from 'sweetalert2'
 import router from 'src/router'
+// const $q = useQuasar()
 
 export const useUserStore = defineStore('user', () => {
   const token = ref('')
@@ -10,8 +12,8 @@ export const useUserStore = defineStore('user', () => {
   const email = ref('')
   const cart = ref(0)
   const role = ref(false)
-  const $q = useQuasar()
   const ShowLogin = ref(false)
+  const noShowRegister = ref(false)
 
   const isLogin = computed(() => {
     return token.value.length > 0
@@ -32,12 +34,13 @@ export const useUserStore = defineStore('user', () => {
       email.value = data.result.email
       cart.value = data.result.cart
       role.value = data.result.role
-      $q.notify({
-        message: '已登入',
+      Notify.create({
+        message: '登入成功',
         color: 'pink'
       })
     } catch (error) {
-      $q.notify({
+      console.log(error)
+      Notify.create({
         message: '登入失敗',
         caption: error?.response?.data?.message || '發生錯誤',
         color: 'pink'
@@ -51,16 +54,29 @@ export const useUserStore = defineStore('user', () => {
       account.value = ''
       role.value = 0
       cart.value = 0
-      $q.notify({
+      Notify.create({
         message: '已登出',
         color: 'pink'
       })
     } catch (error) {
-      $q.notify({
+      Notify.create({
         message: '登出失敗',
         caption: error?.response?.data?.message || '發生錯誤',
         color: 'pink'
       })
+    }
+  }
+
+  const getUser = async () => {
+    if (token.value.length === 0) return
+    try {
+      const { data } = await apiAuth.get('/users/me')
+      account.value = data.result.account
+      email.value = data.result.email
+      cart.value = data.result.cart
+      role.value = data.result.role
+    } catch (error) {
+      logout()
     }
   }
 
@@ -70,10 +86,12 @@ export const useUserStore = defineStore('user', () => {
     email,
     cart,
     role,
+    isLogin,
+    ShowLogin,
+    getUser,
     login,
     logout,
-    isLogin,
-    ShowLogin
+    noShowRegister
   }
 }, {
   persist: {

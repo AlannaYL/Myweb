@@ -35,4 +35,5 @@ const showRegister = ref(false)
 const user = useUserStore()
 const { isLogin, isAdmin, ShowLogin } = storeToRefs(user)
 const { logout } = user
+
 </script>

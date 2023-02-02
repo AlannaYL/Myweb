@@ -14,8 +14,9 @@ import { ref, reactive } from 'vue'
 import validator from 'validator'
 import { api } from 'boot/axios'
 import { useQuasar } from 'quasar'
+import { useUserStore } from 'src/stores/users'
+import router from 'src/router'
 
-const showRegister = ref(false)
 const loading = ref(false)
 const form = reactive({
   account: '',
@@ -25,6 +26,7 @@ const form = reactive({
 })
 
 const $q = useQuasar()
+const user = useUserStore()
 
 const rules = {
   email (value) {
@@ -55,13 +57,16 @@ const register = async () => {
       message: '註冊成功',
       color: 'pink'
     })
+    if ($q.notify.message === '註冊成功') {
+      user.logout()
+      $q.dialog.close()
+    }
   } catch (error) {
     $q.notify({
       message: '註冊失敗',
       caption: error?.response?.data?.message || '發生錯誤',
       color: 'pink'
     })
-    console.log(error)
   }
   loading.value = false
 }
