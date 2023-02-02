@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { api, apiAuth } from 'boot/axios'
 import { Notify } from 'quasar'
-import Swal from 'sweetalert2'
+
 import router from 'src/router'
 // const $q = useQuasar()
 
