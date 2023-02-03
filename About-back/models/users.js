@@ -49,7 +49,8 @@ const schema = new Schema({
   },
   phone: {
     type: String,
-    match: [/^[0-9]{10}$/, '電話只能是數字']
+    match: [/^09[0-9]{8}$/, '電話只能是數字'],
+    default: '0900187087'
   },
   tokens: {
     type: [String],

@@ -33,27 +33,27 @@ const routes = [
           login: false,
           admin: false
         }
-      },
+      }
+    ]
+  },
+  {
+    path: '/Admin',
+    name: 'Admin',
+    component: () => import('src/pages/admin/AdminPage.vue'),
+    meta: {
+      title: '後台管理',
+      login: true,
+      admin: true
+    },
+    children: [
       {
-        path: 'Admin',
-        name: 'Admin',
-        component: () => import('src/pages/admin/AdminPage.vue'),
+        path: '/Add',
+        name: 'Add',
+        component: () => import('src/pages/admin/AddPage.vue'),
         meta: {
-          title: '後台管理',
           login: true,
           admin: true
-        },
-        children: [
-          {
-            path: '/Add',
-            name: 'Add',
-            component: () => import('src/pages/admin/AddPage.vue'),
-            meta: {
-              login: true,
-              admin: true
-            }
-          }
-        ]
+        }
       }
     ]
   },

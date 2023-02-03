@@ -16,7 +16,6 @@ import { createApp } from 'vue'
 // 立刻執行function
 (async () => {
   const app = createApp(App)
-
   await registerPlugins(app)
   app.mount('#app')
 })()

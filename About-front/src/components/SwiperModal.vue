@@ -2,7 +2,7 @@
 swiper.height(:modules="modules" navigation  :breakpoints="breakpoints" @swiper="onSwiper" @slideChange="onSlideChange")
   swiper-slide(v-for="(slide, index) in slides" :key="index")
     .container
-      q-img.swipwe-img(:src="slide.img")
+      img.swipwe-img(:src="slide.img")
 
 </template>
 <script setup>
