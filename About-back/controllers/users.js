@@ -52,3 +52,33 @@ export const logout = async (req, res) => {
     res.status(500).json({ success: false, message: '未知錯誤' })
   }
 }
+
+export const extend = async (req, res) => {
+  try {
+    const idx = req.user.tokens.findIndex(token => token === req.token)
+    const token = jwt.sign({ _id: req.user._id }, process.env.JWT_SECRET, { expiresIn: '7days' })
+    req.user.tokens[idx] = token
+    await req.user.save()
+    res.status(200).json({ success: true, message: '', result: token })
+  } catch (error) {
+    res.status(500).json({ success: false, message: '未知錯誤' })
+  }
+}
+
+export const getUser = (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: '',
+      result: {
+        account: req.user.account,
+        email: req.user.email,
+        cart: req.user.cart.reduce((total, current) => total + current.quantity, 0),
+        role: req.user.role,
+        favorites: req.user.favorites
+      }
+    })
+  } catch (error) {
+    res.status(500).json({ success: false, message: '未知錯誤' })
+  }
+}
