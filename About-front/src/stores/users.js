@@ -51,7 +51,7 @@ export const useUserStore = defineStore('user', () => {
       await apiAuth.delete('/users/logout')
       token.value = ''
       account.value = ''
-      role.value = 0
+      role.value = false
       cart.value = 0
       Notify.create({
         message: '已登出',

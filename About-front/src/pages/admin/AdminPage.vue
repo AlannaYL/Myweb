@@ -1,29 +1,29 @@
 <template lang="pug">
 #AdminPage
-  q-layout(view="hHh lpR fFf" container)
-    q-header(elevated)
+  q-layout(view="hHh lpR fFf")
+    q-header.bg-white.text-black
       q-toolbar
-        q-btn
-          q-avatar
-            img(src="https://cdn.quasar.dev/img/boy-avatar.png")
+        q-avatar
         q-toolbar-title 管理員後台
-    q-drawer(show-if-above bordered :width="240" bg-grey-2)
+    q-drawer(show-if-above :width="240")
       q-scroll-area.fit
-        q-list(padding)
-          q-item(v-for="link in links" :to="link.to" v-ripple clickable)
-            q-item-section(avatar)
-              q-icon(:name="link.icon")
-            q-item-section
-              q-item-label {{ link.text }}
+        ul
+          li.q-pa-md(v-for="link in links")
+            q-btn(:icon="link.icon" :to="link.to" push rounded color="blue") {{ link.text }}
+    q-page-container
+      q-page(padding)
+        p(v-for=" n in 5") ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
+        router-view
 </template>
 <script setup>
 import { ref } from 'vue'
 
 const links = [
-  { icon: 'fa-solid fa-house', text: '回首頁', to: '/' },
-  { icon: 'fa-solid fa-file', text: '展覽資訊', to: '/Admin/Add' },
-  { icon: 'fa-solid fa-users', text: '會員管理', to: '' },
-  { icon: '', text: '訂單管理', to: '' },
-  { icon: '', text: '留言', to: '' }
+  { icon: 'home', text: '返回首頁', to: '/' },
+  { icon: 'feed', text: '展覽資訊', to: '/Admin/Add' },
+  { icon: 'people', text: '會員管理', to: '/Admin/404' },
+  { icon: 'reorder', text: '訂單管理', to: '/Admin/404' },
+  { icon: 'dynamic_feed', text: '留言專區', to: '/Admin/404' }
 ]
+
 </script>
