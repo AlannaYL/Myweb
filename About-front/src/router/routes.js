@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/Admin',
     name: 'Admin',
-    component: () => import('src/pages/admin/AdminPage.vue'),
+    component: () => import('src/layouts/AdminPage.vue'),
     meta: {
       title: '後台管理',
       login: true,
