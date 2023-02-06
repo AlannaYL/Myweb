@@ -29,14 +29,9 @@ const schema = new Schema({
     type: Boolean,
     required: [true, '缺少狀態']
   },
-  content: {
-    type: String
-  },
-  tag: {
-    type: String
-  },
   map: {
     type: String
+    // google 地圖
   },
   category: {
     type: String,

@@ -15,22 +15,32 @@ const routes = [
         }
       },
       {
-        path: 'Member',
-        name: 'Member',
-        component: () => import('src/pages/front/MemberPage.vue'),
+        path: 'About',
+        name: 'About',
+        component: () => import('src/pages/front/AboutusPage.vue'),
         meta: {
-          title: '會員服務',
-          login: true,
+          title: '關於',
+          login: false,
           admin: false
         }
       },
       {
-        path: 'About',
-        name: 'About',
-        component: () => import('src/pages/front/AboutPage.vue'),
+        path: 'Exhibitions',
+        name: 'Exhibitions',
+        component: () => import('src/pages/front/ExhibitionsPage.vue'),
         meta: {
-          title: '關於我們',
+          title: '資訊',
           login: false,
+          admin: false
+        }
+      },
+      {
+        path: 'Member',
+        name: 'Member',
+        component: () => import('src/pages/front/MemberPage.vue'),
+        meta: {
+          title: '會員',
+          login: true,
           admin: false
         }
       }

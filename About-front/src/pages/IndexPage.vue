@@ -1,5 +1,5 @@
 <template lang="pug">
-#MySwiper
+#IndexSwiper
   SwiperModal
 </template>
 <script setup>

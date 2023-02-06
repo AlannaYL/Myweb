@@ -1,7 +1,7 @@
 <template lang="pug">
 swiper.height(:modules="modules" navigation  :breakpoints="breakpoints" @swiper="onSwiper" @slideChange="onSlideChange")
   swiper-slide(v-for="(slide, index) in slides" :key="index")
-    .container
+    .swipwe-section
       img.swipwe-img(:src="slide.img")
 
 </template>

@@ -1,4 +1,57 @@
 #Menu
-  background: $pink
+  background: #FAF1E8
   width: 100vw
   height: 100vh
+  overflow: hidden
+
+#Navigation
+  display: flex
+  flex-direction: column
+  #MenuLogo
+    text-align: center
+  @include md
+    flex-direction: row
+
+#MenuList
+  list-style: none
+  display: flex
+  flex-direction: column
+  writing-mode: vertical-lr
+  font-size: 3rem
+  padding: 5%
+  @include sm
+    font-size: 5rem
+    padding: 0
+    margin: auto
+    .item
+      width: 32%
+      position: relative
+      top: -36%
+      z-index: 0
+      li
+        z-index: 1
+        line-height: 1.5
+        a
+          margin-top: 84px 
+      &::before
+        content: ''
+        width: 40%
+        height: 100vh
+        position: absolute
+        right: 0
+        z-index: -1
+  @include md
+    font-size: 6rem
+
+a
+  text-decoration: none
+  color: #000
+
+
+.item:nth-of-type(odd)::before
+  content: ''
+  background: $pink
+
+.item:nth-of-type(even)::before
+  content: ''
+  background: $blue
