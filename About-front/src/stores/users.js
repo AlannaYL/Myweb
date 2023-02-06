@@ -2,8 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { api, apiAuth } from 'boot/axios'
 import { Notify } from 'quasar'
-
-import router from 'src/router'
+import { useRouter } from 'vue-router'
 // const $q = useQuasar()
 
 export const useUserStore = defineStore('user', () => {
@@ -25,7 +24,7 @@ export const useUserStore = defineStore('user', () => {
     return `https://source.boringavatars.com/beam/56/${account.value}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`
   })
 
-  const login = async (form) => {
+  async function login (form) {
     try {
       const { data } = await api.post('/users/login', form)
       token.value = data.result.token

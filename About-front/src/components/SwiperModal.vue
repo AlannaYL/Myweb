@@ -1,5 +1,5 @@
 <template lang="pug">
-swiper.height(:modules="modules" navigation  :breakpoints="breakpoints" @swiper="onSwiper" @slideChange="onSlideChange")
+swiper.height(:modules="modules" navigation  :breakpoints="breakpoints")
   swiper-slide(v-for="(slide, index) in slides" :key="index")
     .swipwe-section
       img.swipwe-img(:src="slide.img")
@@ -12,13 +12,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-
-const onSwiper = (swiper) => {
-  console.log(swiper)
-}
-const onSlideChange = () => {
-  console.log('slide change')
-}
 
 const breakpoints = {
   slidesPerView: 1,

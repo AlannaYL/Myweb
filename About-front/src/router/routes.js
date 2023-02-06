@@ -19,7 +19,7 @@ const routes = [
         name: 'About',
         component: () => import('src/pages/front/AboutusPage.vue'),
         meta: {
-          title: '關於',
+          title: '關於我們',
           login: false,
           admin: false
         }
@@ -29,7 +29,7 @@ const routes = [
         name: 'Exhibitions',
         component: () => import('src/pages/front/ExhibitionsPage.vue'),
         meta: {
-          title: '資訊',
+          title: '展覽活動',
           login: false,
           admin: false
         }
@@ -49,7 +49,7 @@ const routes = [
   {
     path: '/Admin',
     name: 'Admin',
-    component: () => import('src/layouts/AdminPage.vue'),
+    component: () => import('src/layouts/AdminLayout.vue'),
     meta: {
       title: '後台管理',
       login: true,
@@ -57,9 +57,9 @@ const routes = [
     },
     children: [
       {
-        path: '/Add',
-        name: 'Add',
-        component: () => import('src/pages/admin/AddPage.vue'),
+        path: '',
+        name: 'AdminHome',
+        component: () => import('src/pages/admin/AdminPage.vue'),
         meta: {
           login: true,
           admin: true
