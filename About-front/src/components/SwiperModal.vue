@@ -6,12 +6,12 @@ swiper.height(:modules="modules" navigation  :breakpoints="breakpoints")
 
 </template>
 <script setup>
+import { reactive } from 'vue'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
 
 const breakpoints = {
   slidesPerView: 1,
@@ -41,6 +41,6 @@ const slides = [
   { img: 'https://placeimg.com/500/600/nature' }
 ]
 
-const modules = [Navigation, Pagination]
+const modules = reactive([Navigation, Pagination])
 
 </script>

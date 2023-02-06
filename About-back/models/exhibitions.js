@@ -9,9 +9,13 @@ const schema = new Schema({
     type: String,
     required: [true, '缺少主辦']
   },
-  date: {
-    type: String,
-    required: [true, '缺少日期']
+  from: {
+    type: Date,
+    required: [true, '缺少起始日期']
+  },
+  to: {
+    type: Date,
+    required: [true, '缺少起結束日期']
   },
   place: {
     type: String,
