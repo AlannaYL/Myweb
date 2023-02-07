@@ -4,6 +4,10 @@
   q-btn(push rounded color="blue" label="新增展覽" @click="openAdd(-1)")
   .col-12(v-for='(exhibition, idx) in exhibitions' :key='exhibition._id')
     q-btn(@click="openAdd(idx)") {{ exhibition.name }}
+  .col-12
+    q-table(:rows="exhibitions" :columns="columns" row-key="_id")
+      template(v-slot:body-cell-image="props")
+        img(:src="props.row.image" style="height: 100px")
   q-dialog(v-model="form.dialog" persistent)
     q-card(style="width: 90%")
       q-form(@submit="onSubmit")
@@ -12,38 +16,38 @@
           q-space
           <q-btn icon="close" flat round dense v-close-popup />
         q-card-section
-            q-input.col-12.q-pb-lg(v-model="form.title" filled label="請輸入展覽名稱" :rules="[rules.required,rules.length]")
-            q-input.col-12.q-pb-lg(v-model="form.name" filled label="請輸入主辦名稱" :rules="[rules.required,rules.length]")
-            q-input.col-6.q-pr-sm.q-pb-lg(v-model="form.from" type="text" filled :rules="[rules.required]" label="請選擇開始日期")
+          q-input.col-12.q-pb-lg(v-model="form.title" filled label="請輸入展覽名稱" :rules="[rules.required,rules.length]")
+          q-input.col-12.q-pb-lg(v-model="form.name" filled label="請輸入主辦名稱" :rules="[rules.required,rules.length]")
+          q-input.col-6.q-pb-lg(v-model="form.from" type="text" filled :rules="[rules.required]" label="請選擇開始日期")
             q-icon(name="event" size="24px" class="cursor-pointer q-py-md")
               q-popup-proxy(cover transition-show="scale" transition-hide="scale")
                 q-date(v-model="form.from" minimal)
                   .row.items-center.justify-end
                     q-btn(label="OK" flat v-close-popup)
-            q-input.col-6.q-pl-sm.q-pb-lg(v-model="form.to" type="text" filled :rules="[rules.required]"  label="請選擇結束日期")
-                q-icon(name="event" size="24px" class="cursor-pointer q-py-md")
-                  q-popup-proxy(cover transition-show="scale" transition-hide="scale")
-                    q-date(v-model="form.to" minimal)
-                      .row.items-center.justify-end
-                        q-btn(label="OK" flat v-close-popup)
-            q-input.col-12.q-pb-lg(v-model="form.place" filled label="請輸入展覽地點" :rules="[rules.required]")
-            q-input.col-12.q-pb-lg(v-model="form.description" filled type="textarea" label="請輸入展覽說明" :rules="[rules.required]")
-            q-file.col-12(v-model="form.image" filled label="選擇主題圖片" stack-label :rules="[rules.required]")
-              template(v-slot:append)
-                q-icon(name="close" @click="clear" class="cursor-pointer")
-            hr
-            .row
-              .col-3(v-for="img in form.displayImages" :key="img")
-                q-img.full-width(:src="img")
-                  div.absolute-full.flex.flex-center(v-if="form.delImages.includes(img)")
-                    q-icon(name="delete")
-                q-checkbox(v-model="form.delImages" :val="img")
-            q-file.col-12(v-model="form.images" filled stack-label label="選擇內容圖片" multiple)
-              template(v-slot:append)
-                q-icon(name="close" @click="clears" class="cursor-pointer")
-            q-checkbox.col-12(v-model="form.sell" label="上架" color="pink")
-            q-input(v-model="form.map" label="地圖")
-            q-select.col-12(v-model="form.category" filled :options="category" label="請選擇覽展類別" :rules="[rules.required]")
+          q-input.col-6.q-pb-lg(v-model="form.to" type="text" filled :rules="[rules.required]"  label="請選擇結束日期")
+              q-icon(name="event" size="24px" class="cursor-pointer q-py-md")
+                q-popup-proxy(cover transition-show="scale" transition-hide="scale")
+                  q-date(v-model="form.to" minimal)
+                    .row.items-center.justify-end
+                      q-btn(label="OK" flat v-close-popup)
+          q-input.col-12.q-pb-lg(v-model="form.place" filled label="請輸入展覽地點" :rules="[rules.required]")
+          q-input.col-12.q-pb-lg(v-model="form.description" filled type="textarea" label="請輸入展覽說明" :rules="[rules.required]")
+          q-file.col-12(v-model="form.image" filled label="選擇主題圖片" stack-label)
+            template(v-slot:append)
+              q-icon(name="close" @click="clear" class="cursor-pointer")
+          hr
+          .row
+            .col-3(v-if="form.idx >= 0" v-for="img in exhibitions[form.idx]?.images" :key="img")
+              q-img.full-width(:src="img")
+                div.absolute-full.flex.flex-center(v-if="form.delImages.includes(img)")
+                  q-icon(name="delete")
+              q-checkbox(v-model="form.delImages" :val="img")
+          q-file.col-12(v-model="form.images" filled stack-label label="選擇內容圖片" multiple)
+            template(v-slot:append)
+              q-icon(name="close" @click="clears" class="cursor-pointer")
+          q-checkbox.col-12(v-model="form.sell" label="上架" color="pink")
+          q-input(v-model="form.map" label="地圖")
+          q-select.col-12(v-model="form.category" filled :options="category" label="請選擇覽展類別" :rules="[rules.required]")
         q-card-actions
           q-btn(:disabled="form.loading" flat label='submit' type="submit" color='blue')
 </template>
@@ -56,6 +60,51 @@ const $q = useQuasar()
 const exhibitions = reactive([])
 const showFrom = ref(false)
 const showTo = ref(false)
+
+const columns = [
+  {
+    name: 'title',
+    label: 'Title',
+    field: 'title',
+    align: 'center'
+  },
+  {
+    name: 'name',
+    label: 'Name',
+    field: 'name',
+    align: 'center'
+  },
+  {
+    name: 'from',
+    label: 'From',
+    field: 'from',
+    align: 'center'
+  },
+  {
+    name: 'to',
+    label: 'To',
+    field: 'to',
+    align: 'center'
+  },
+  {
+    name: 'image',
+    label: 'Image',
+    field: 'image',
+    align: 'center'
+  },
+  {
+    name: 'sell',
+    label: 'Sell',
+    field: 'sell',
+    align: 'center'
+  },
+  {
+    name: 'category',
+    label: 'Category',
+    field: 'category',
+    align: 'center'
+  }
+]
 
 const rules = {
   required (value) {
@@ -155,19 +204,23 @@ const onSubmit = async () => {
     if (form._id.length === 0) {
       const { data } = await apiAuth.post('/exhibitions', fd)
       exhibitions.push(data.result)
+      $q.notify({
+        message: '新增成功',
+        color: 'pink'
+      })
     } else {
       const { data } = await apiAuth.patch('/exhibitions/' + form._id, fd)
       exhibitions[form.idx] = (data.result)
     }
     $q.notify({
-      message: '新增成功',
+      message: '編輯成功',
       color: 'pink'
     })
     form.dialog = false
   } catch (error) {
     console.log(error)
     $q.notify({
-      message: '新增失敗',
+      message: '操作失敗',
       caption: error?.response?.data?.message || '發生錯誤',
       color: 'pink'
     })
@@ -177,10 +230,12 @@ const onSubmit = async () => {
 
 (async () => {
   try {
-    const { data } = await apiAuth.get('/exhibitions')
+    const { data } = await apiAuth.get('/exhibitions/all')
     exhibitions.push(...data.result)
   } catch (error) {
 
   }
 })()
+
+console.log(exhibitions)
 </script>

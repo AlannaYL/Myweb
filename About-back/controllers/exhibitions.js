@@ -64,7 +64,7 @@ export const getExhibition = async (req, res) => {
 export const editExhibition = async (req, res) => {
   try {
     const exhibition = await exhibitions.findById(req.params.id)
-    const images = exhibition.images.filter(image => !req.body.delImages.includes(image)).concat(req.files?.images?.map(file => file.path))
+    const images = exhibition.images.filter(image => !req.body?.delImages?.includes(image) || true).concat(req.files?.images?.map(file => file.path))
 
     exhibition.title = req.body.title
     exhibition.name = req.body.name

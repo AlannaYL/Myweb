@@ -57,10 +57,6 @@ const register = async () => {
       message: '註冊成功',
       color: 'pink'
     })
-    if ($q.notify.message === '註冊成功') {
-      user.logout()
-      $q.dialog.close()
-    }
   } catch (error) {
     $q.notify({
       message: '註冊失敗',
