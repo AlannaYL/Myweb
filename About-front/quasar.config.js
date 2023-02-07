@@ -32,8 +32,8 @@ module.exports = configure(function (/* ctx */) {
     boot: [
       'i18n',
       'axios',
-      'user',
-      'swiper'
+      'swiper',
+      'img-input'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
