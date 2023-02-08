@@ -1,13 +1,15 @@
 <template lang="pug">
 #Admin-exhibitions.row
   h4.text-center.col-12 展覽管理
-  q-btn(push rounded color="blue" label="新增展覽" @click="openAdd(-1)")
-  .col-12(v-for='(exhibition, idx) in exhibitions' :key='exhibition._id')
-    q-btn(@click="openAdd(idx)") {{ exhibition.name }}
+  q-btn.q-mb-lg(push rounded color="blue" label="新增展覽" @click="openAdd(-1)")
   .col-12
     q-table(:rows="exhibitions" :columns="columns" row-key="_id")
       template(v-slot:body-cell-image="props")
-        img(:src="props.row.image" style="height: 100px")
+        .flex.justify-center
+          img(:src="props.row.image" style="width: 100px")
+      template(v-slot:body-cell-edit="props")
+        .btn-center
+          q-btn(round @click="openAdd(exhibitions.findIndex(item => item._id === props.row._id ))" icon="fa-solid fa-pen-to-square")
   q-dialog(v-model="form.dialog" persistent)
     q-card(style="width: 90%")
       q-form(@submit="onSubmit")
@@ -58,6 +60,7 @@ import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
 const exhibitions = reactive([])
+
 const showFrom = ref(false)
 const showTo = ref(false)
 
@@ -65,44 +68,49 @@ const columns = [
   {
     name: 'title',
     label: 'Title',
-    field: 'title',
-    align: 'center'
+    field: row => row.title,
+    align: 'left'
   },
   {
     name: 'name',
     label: 'Name',
     field: 'name',
-    align: 'center'
+    align: 'left'
   },
   {
     name: 'from',
     label: 'From',
-    field: 'from',
-    align: 'center'
+    field: row => new Date(row.from).toLocaleDateString(),
+    align: 'left'
   },
   {
     name: 'to',
     label: 'To',
-    field: 'to',
-    align: 'center'
+    field: row => new Date(row.to).toLocaleDateString(),
+    align: 'left'
   },
   {
     name: 'image',
     label: 'Image',
     field: 'image',
-    align: 'center'
+    align: 'left'
   },
   {
     name: 'sell',
     label: 'Sell',
     field: 'sell',
-    align: 'center'
+    align: 'left'
   },
   {
     name: 'category',
     label: 'Category',
     field: 'category',
-    align: 'center'
+    align: 'left'
+  },
+  {
+    name: 'edit',
+    label: 'Edit',
+    align: 'left'
   }
 ]
 
@@ -136,7 +144,7 @@ const form = reactive({
   idx: -1
 })
 
-const clear = () => { form.image = undefined }
+const clear = () => { form.images = undefined }
 const clears = () => { form.images = [] }
 
 const openAdd = (idx) => {
@@ -198,7 +206,6 @@ const onSubmit = async () => {
   fd.append('sell', form.sell)
   fd.append('map', form.map)
   fd.append('category', form.category)
-
   try {
     // 當id長度為 0，新增
     if (form._id.length === 0) {
@@ -211,11 +218,11 @@ const onSubmit = async () => {
     } else {
       const { data } = await apiAuth.patch('/exhibitions/' + form._id, fd)
       exhibitions[form.idx] = (data.result)
+      $q.notify({
+        message: '編輯成功',
+        color: 'pink'
+      })
     }
-    $q.notify({
-      message: '編輯成功',
-      color: 'pink'
-    })
     form.dialog = false
   } catch (error) {
     console.log(error)
@@ -237,5 +244,8 @@ const onSubmit = async () => {
   }
 })()
 
-console.log(exhibitions)
 </script>
+<style lang="sass">
+.btn-center
+  margin-bottom: 30px
+</style>

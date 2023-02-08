@@ -64,7 +64,12 @@ export const getExhibition = async (req, res) => {
 export const editExhibition = async (req, res) => {
   try {
     const exhibition = await exhibitions.findById(req.params.id)
-    const images = exhibition.images.filter(image => !req.body?.delImages?.includes(image) || true).concat(req.files?.images?.map(file => file.path))
+    const images = exhibition.images.filter(image => {
+      if (!req.body.delImages) {
+        return true
+      }
+      return !req.body.delImages.includes(image)
+    }).concat(req.files?.images?.map(file => file.path)).filter(image => image !== null && image !== undefined)
 
     exhibition.title = req.body.title
     exhibition.name = req.body.name
@@ -72,7 +77,7 @@ export const editExhibition = async (req, res) => {
     exhibition.to = req.body.to
     exhibition.place = req.body.place
     exhibition.description = req.body.description
-    exhibition.image = req.files?.image?.[0]?.path
+    exhibition.image = req.files?.image?.[0]?.path || exhibition.image
     exhibition.images = images
     exhibition.sell = req.body.sell
     exhibition.tag = req.body.tag

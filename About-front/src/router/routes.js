@@ -64,6 +64,15 @@ const routes = [
           login: true,
           admin: true
         }
+      },
+      {
+        path: '/members',
+        name: 'Adminmembers',
+        component: () => import('src/pages/admin/MemberPage.vue'),
+        meta: {
+          login: true,
+          admin: true
+        }
       }
     ]
   },
