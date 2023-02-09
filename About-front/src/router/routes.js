@@ -73,6 +73,15 @@ const routes = [
           login: true,
           admin: true
         }
+      },
+      {
+        path: '/orders',
+        name: 'Adminorders',
+        component: () => import('src/pages/admin/OrdersPage.vue'),
+        meta: {
+          login: true,
+          admin: true
+        }
       }
     ]
   },

@@ -1,15 +1,19 @@
 <template lang="pug">
 #Admin-exhibitions.row
   h4.text-center.col-12 展覽管理
-  q-btn.q-mb-lg(push rounded color="blue" label="新增展覽" @click="openAdd(-1)")
+  q-btn.q-mb-lg(label="新增展覽" @click="openAdd(-1)" push rounded color="blue" )
+  q-btn.q-ml-lg.q-mb-lg(v-for="(name, i) in filterName" :key="i" :label="name" @click="filterCategory = name" push rounded color="blue")
   .col-12
-    q-table(:rows="exhibitions" :columns="columns" row-key="_id")
+    q-table(:rows="filterData" :columns="columns" row-key="_id")
       template(v-slot:body-cell-image="props")
-        .flex.justify-center
-          img(:src="props.row.image" style="width: 100px")
+        q-td
+          img(:src="props.row.image" style="height: 100px")
+      template(v-slot:body-cell-sell="props")
+        q-td
+          q-icon.btn-size(:name="props.row.sell? 'fa-solid fa-face-smile': 'fa-solid fa-face-dizzy'")
       template(v-slot:body-cell-edit="props")
-        .btn-center
-          q-btn(round @click="openAdd(exhibitions.findIndex(item => item._id === props.row._id ))" icon="fa-solid fa-pen-to-square")
+        q-td
+          q-btn(round @click="openAdd(filterData.findIndex(item => item._id === props.row._id ))" icon="fa-solid fa-pen-to-square")
   q-dialog(v-model="form.dialog" persistent)
     q-card(style="width: 90%")
       q-form(@submit="onSubmit")
@@ -55,11 +59,13 @@
 </template>
 <script setup>
 import { apiAuth } from 'src/boot/axios'
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
 const exhibitions = reactive([])
+const filterName = ['全部', '藝文', '展覽', '活動']
+const filterCategory = ref('全部')
 
 const showFrom = ref(false)
 const showTo = ref(false)
@@ -69,48 +75,41 @@ const columns = [
     name: 'title',
     label: 'Title',
     field: row => row.title,
-    align: 'left'
-  },
-  {
-    name: 'name',
-    label: 'Name',
-    field: 'name',
-    align: 'left'
+    align: 'center'
   },
   {
     name: 'from',
     label: 'From',
     field: row => new Date(row.from).toLocaleDateString(),
-    align: 'left'
+    align: 'center'
   },
   {
     name: 'to',
     label: 'To',
     field: row => new Date(row.to).toLocaleDateString(),
-    align: 'left'
+    align: 'center'
   },
   {
     name: 'image',
     label: 'Image',
     field: 'image',
-    align: 'left'
+    align: 'center'
   },
   {
     name: 'sell',
     label: 'Sell',
-    field: 'sell',
-    align: 'left'
+    align: 'center'
   },
   {
     name: 'category',
     label: 'Category',
     field: 'category',
-    align: 'left'
+    align: 'center'
   },
   {
     name: 'edit',
     label: 'Edit',
-    align: 'left'
+    align: 'center'
   }
 ]
 
@@ -122,8 +121,6 @@ const rules = {
     return value.length >= 3 || '必須大於3個字'
   }
 }
-
-const category = ['展覽', '藝文', '活動']
 
 const form = reactive({
   _id: '',
@@ -225,7 +222,6 @@ const onSubmit = async () => {
     }
     form.dialog = false
   } catch (error) {
-    console.log(error)
     $q.notify({
       message: '操作失敗',
       caption: error?.response?.data?.message || '發生錯誤',
@@ -244,8 +240,16 @@ const onSubmit = async () => {
   }
 })()
 
+const filterData = computed(() => {
+  if (filterCategory.value !== '全部') {
+    return exhibitions.filter(item => item.category === filterCategory.value)
+  }
+  return exhibitions
+})
 </script>
 <style lang="sass">
-.btn-center
-  margin-bottom: 30px
+.btn-size
+  font-size: 30px
+td
+  text-align: center
 </style>

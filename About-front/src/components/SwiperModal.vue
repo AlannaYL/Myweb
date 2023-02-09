@@ -1,46 +1,58 @@
 <template lang="pug">
-swiper.height(:modules="modules" navigation  :breakpoints="breakpoints")
-  swiper-slide(v-for="(slide, index) in slides" :key="index")
-    .swipwe-section
-      img.swipwe-img(:src="slide.img")
-
+.swipwe-section
+  img.swipwe-img(:src="image")
+  q-chip.q-mt-xl(rounded) ＃{{ category }}
+  h5 {{ title }}
 </template>
 <script setup>
-import { reactive } from 'vue'
-import { Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-
-const breakpoints = {
-  slidesPerView: 1,
-  slidesPerGroup: 1,
-  spaceBetween: 10,
-  pagination: {
-    clickable: true
+defineProps({
+  _id: {
+    type: String,
+    default: ''
   },
-  600: {
-    slidesPerView: 2,
-    slidesPerGroup: 2,
-    spaceBetween: 20
+  title: {
+    type: String,
+    default: ''
   },
-  1024: {
-    slidesPerView: 3,
-    slidesPerGroup: 3,
-    spaceBetween: 20
+  name: {
+    type: String,
+    default: ''
+  },
+  from: {
+    type: String,
+    default: ''
+  },
+  to: {
+    type: String,
+    default: ''
+  },
+  place: {
+    type: String,
+    default: undefined
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  image: {
+    type: String,
+    default: undefined
+  },
+  images: {
+    type: [String],
+    default: ''
+  },
+  sell: {
+    type: Boolean,
+    default: false
+  },
+  map: {
+    type: String
+  },
+  category: {
+    type: String,
+    default: ''
   }
 }
-
-const slides = [
-  { img: 'https://placeimg.com/500/600/nature' },
-  { img: 'https://placeimg.com/500/600/nature' },
-  { img: 'https://placeimg.com/500/600/nature' },
-  { img: 'https://placeimg.com/500/600/nature' },
-  { img: 'https://placeimg.com/500/600/nature' },
-  { img: 'https://placeimg.com/500/600/nature' }
-]
-
-const modules = reactive([Navigation, Pagination])
-
+)
 </script>
