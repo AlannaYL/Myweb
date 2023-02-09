@@ -1,15 +1,16 @@
 <template lang="pug">
 #Section_01
-  swiper.height(:modules="modules" navigation  :breakpoints="breakpoints")
+  swiper.height(:modules="modules" :breakpoints="breakpoints")
     swiper-slide(v-for="i in exhibitions" style="width: 500px")
       SwiperModal(v-bind="i")
+  q-btn(outline color="pink" icon="fa-solid fa-arrow-down").scorll-btn list
 
 </template>
 <script setup>
 import { reactive } from 'vue'
 import { api } from 'src/boot/axios'
 import { useQuasar } from 'quasar'
-import { Navigation, Pagination } from 'swiper'
+import { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import SwiperModal from 'src/components/SwiperModal.vue'
 import 'swiper/css'
@@ -17,7 +18,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 const $q = useQuasar()
-const modules = reactive([Navigation, Pagination])
+const modules = reactive([Pagination])
 
 const breakpoints = {
   slidesPerView: 1,

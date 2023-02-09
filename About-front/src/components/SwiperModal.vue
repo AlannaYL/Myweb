@@ -1,8 +1,9 @@
 <template lang="pug">
 .swipwe-section
   img.swipwe-img(:src="image")
-  q-chip.q-mt-xl(rounded) ＃{{ category }}
+  q-chip.q-mt-xl(color="blue" size="xs") ＃{{ category }}
   h5 {{ title }}
+  p {{ place }}
 </template>
 <script setup>
 defineProps({

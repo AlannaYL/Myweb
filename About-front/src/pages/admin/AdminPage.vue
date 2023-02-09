@@ -53,7 +53,7 @@
               q-icon(name="close" @click="clears" class="cursor-pointer")
           q-checkbox.col-12(v-model="form.sell" label="上架" color="pink")
           q-input(v-model="form.map" label="地圖")
-          q-select.col-12(v-model="form.category" filled :options="category" label="請選擇覽展類別" :rules="[rules.required]")
+          q-select.col-12(v-model="form.category" filled :options="categories" label="請選擇覽展類別" :rules="[rules.required]")
         q-card-actions
           q-btn(:disabled="form.loading" flat label='submit' type="submit" color='blue')
 </template>
@@ -66,6 +66,7 @@ const $q = useQuasar()
 const exhibitions = reactive([])
 const filterName = ['全部', '藝文', '展覽', '活動']
 const filterCategory = ref('全部')
+const categories = ['展覽', '藝文', '活動']
 
 const showFrom = ref(false)
 const showTo = ref(false)
