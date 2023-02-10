@@ -7,6 +7,7 @@
 #Navigation
   display: flex
   flex-direction: column
+  justify-content: space-evenly
   #MenuLogo
     text-align: center
   @include md
@@ -17,12 +18,12 @@
   display: flex
   flex-direction: column
   writing-mode: vertical-lr
-  font-size: 3rem
+  font-size: 2rem
   padding: 5%
   @include sm
-    font-size: 5rem
+    font-size: 3rem
+    margin-left: 10%
     padding: 0
-    margin: auto
     .item
       width: 32%
       position: relative
@@ -41,8 +42,9 @@
         position: absolute
         right: 28px
         z-index: -1
-  @include md
-    font-size: 6rem
+  @include lg
+    margin-left: 8% 
+    font-size: 4.5rem
 
 a
   text-decoration: none

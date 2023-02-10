@@ -3,7 +3,7 @@ import { Schema, model, ObjectId } from 'mongoose'
 const orderSchema = new Schema({
   p_id: {
     type: ObjectId,
-    ref: 'products',
+    ref: 'exhibitions',
     required: [true, '缺少商品']
   },
   quantity: {
@@ -21,10 +21,6 @@ const schema = new Schema({
   products: {
     type: [orderSchema],
     default: []
-  },
-  date: {
-    type: Date,
-    default: Date.now
   },
   state: {
     type: String,

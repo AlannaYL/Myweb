@@ -1,9 +1,9 @@
 <template lang="pug">
 #Section_01
   swiper.height(:modules="modules" :spaceBetween="1" :slidesPerView="'auto'" )
-    swiper-slide(v-for="i in exhibitions" style="width: 500px")
+    swiper-slide(v-for="i in exhibitions")
       SwiperModal(v-bind="i")
-  q-btn(outline color="pink" icon="fa-solid fa-arrow-down").scorll-btn list
+  q-btn.scorll-btn(outline color="pink" icon="fa-solid fa-arrow-down") list
 
 </template>
 <script setup>
@@ -47,9 +47,3 @@ const exhibitions = reactive([]);
   }
 })()
 </script>
-
-<style lang="sass">
-.swiper-slide:nth-of-type(odd)
-  .swiper-section::before
-    background: red
-</style>

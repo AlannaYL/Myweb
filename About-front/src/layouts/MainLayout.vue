@@ -7,6 +7,8 @@
         q-avatar
         q-toolbar-title 我不可愛
         .q-gutter-x-md
+          q-btn(v-if="cart > 0" icon='fa-solid fa-cart-shopping' push round color="white" text-color="black")
+            q-badge(:label="cart" rounded floating color="pink")
           q-btn(v-if="isLogin" @click="logout" icon='fa-solid fa-person-through-window' push round color="white" text-color="black")
           q-btn(v-if="isLogin && isAdmin" to="/Admin" icon='fa-solid fa-eye' @click="ShowLogin = true" push round color="white" text-color="black")
           q-btn(v-if="!isLogin" icon='face' @click="ShowLogin = true" push round color="white" text-color="black")
@@ -34,7 +36,6 @@ import LoginModal from 'components/LoginModal.vue'
 const showRegister = ref(false)
 
 const user = useUserStore()
-const { isLogin, isAdmin, ShowLogin } = storeToRefs(user)
+const { isLogin, isAdmin, ShowLogin, cart } = storeToRefs(user)
 const { logout } = user
-
 </script>

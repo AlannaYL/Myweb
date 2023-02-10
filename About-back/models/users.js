@@ -5,7 +5,19 @@ import bcrypt from 'bcrypt'
 const cartSchema = new Schema({
   p_id: {
     type: ObjectId,
-    ref: 'products',
+    ref: 'exhibitions',
+    required: [true, '缺少商品']
+  },
+  quantity: {
+    type: Number,
+    required: [true, '缺少數量']
+  }
+})
+
+const loveSchema = new Schema({
+  p_id: {
+    type: ObjectId,
+    ref: 'exhibitions',
     required: [true, '缺少商品']
   }
 })
@@ -46,6 +58,10 @@ const schema = new Schema({
   },
   cart: {
     type: [cartSchema],
+    default: []
+  },
+  love: {
+    type: [loveSchema],
     default: []
   },
   role: {

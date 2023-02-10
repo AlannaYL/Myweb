@@ -87,7 +87,7 @@ export const useUserStore = defineStore('user', () => {
       return
     }
     try {
-      const { data } = await apiAuth.post('/user/cart', { p_id: _id, quantity })
+      const { data } = await apiAuth.post('/users/cart', { p_id: _id, quantity })
       cart.value = data.result
       Notify.create({
         message: '放入購物車',

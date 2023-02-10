@@ -33,12 +33,10 @@
       left: 24px
       z-index: -1
       background: $pink 
-  h5
-    margin: 0
   .scorll-btn
     position: absolute
     z-index: 10
-    bottom: 24px
+    bottom: 36px
     left: 50%
     transform: translateX(-50%)
     background: transparent
@@ -46,22 +44,27 @@
     font-size: 12px
   .q-icon
     font-size: 12px 
-  @include md
-    .swipwe-section::before
-      top: 75px
-      left: 30px
-  @include lg
-    .swipwe-img
-      height: 500px
-    .swipwe-section::before
-      top: 90px
-      left: 45px
-      height: 500px
   .swiper
     width: 77%
     position: absolute
     right: 0
+  h5
+    margin: 1rem 0 
 
+@include md
+  .swipwe-section::before
+    top: 75px
+    left: 30px
+  h5
+    font-size: 24px 
+    margin: 1.2rem 0 
+
+@include lg
+  .swiper-slide
+    width: 600px !important
+  .swipwe-section::before
+    top: 82px !important
+    left: 45px
 
 .swiper-slide
   margin-left: 100px !important

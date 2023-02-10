@@ -39,7 +39,6 @@ export const login = async (req, res) => {
       }
     })
   } catch (error) {
-    console.log(error)
     res.status(500).json({ success: false, message: '未知錯誤' })
   }
 }
@@ -87,7 +86,7 @@ export const editCart = async (req, res) => {
   try {
     const idx = req.user.cart.findIndex(cart => cart.p_id.toString() === req.body.p_id)
     if (idx > -1) {
-      const quantity = req.user.cart[idx].quantity + req.body.quantity
+      const quantity = req.user.cart[idx].quantity + parseInt(req.body.quantity)
       if (quantity <= 0) {
         req.user.cart.splice(idx, 1)
       } else {
@@ -105,7 +104,7 @@ export const editCart = async (req, res) => {
       })
     }
     await req.user.save()
-    res.status(200).json({ success: true, message: '', result: req.user.length })
+    res.status(200).json({ success: true, message: '', result: req.user.cart.reduce((total, current) => total + current.quantity, 0) })
   } catch (error) {
     if (error.name === 'ValidationError') {
       res.status(400).json({ success: false, message: error.errors[Object.keys(error.errors)[0]].message })

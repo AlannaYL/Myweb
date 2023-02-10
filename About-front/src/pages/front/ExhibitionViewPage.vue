@@ -6,7 +6,7 @@
     h1.col-12 {{ exhibitions.title }}
     p.q-mt-xl.q-ml-xl.text-p {{ exhibitions.from + '' + '~' + '' + exhibitions.to }}
       .text-right
-        q-btn.btn( @click="editCart" push round icon="fa-regular fa-heart" color="pink")
+        q-btn.btn(@click="editCart({_id: exhibitions._id, quantity: 1})" push round icon="fa-regular fa-heart" color="pink")
         q-btn.btn( @click="Add = true" push rounded icon="fa-solid fa-cart-shopping" label="購票去" color="pink")
     q-chip.q-ml-xl(color="blue" size="md") ＃{{ exhibitions.category }}
     h2.col-12.q-ml-lg 【介紹】
