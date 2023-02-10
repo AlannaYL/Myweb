@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import userRoute from './routes/users.js'
 import exhibitionsRoute from './routes/exhibitions.js'
+import orderRoute from './routes/orders.js'
 import './passport/passport.js'
 
 mongoose.connect(process.env.DB_URL)
@@ -30,6 +31,7 @@ app.use((_, req, res, next) => {
 })
 app.use('/users', userRoute)
 app.use('/exhibitions', exhibitionsRoute)
+app.use('/orders', orderRoute)
 
 app.get('/', (req, res) => {
   res.status(200).json({ success: true, message: '' })

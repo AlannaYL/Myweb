@@ -1,6 +1,6 @@
 <template lang="pug">
 #Section_01
-  swiper.height(:modules="modules" :breakpoints="breakpoints")
+  swiper.height(:modules="modules" :spaceBetween="1" :slidesPerView="'auto'" )
     swiper-slide(v-for="i in exhibitions" style="width: 500px")
       SwiperModal(v-bind="i")
   q-btn(outline color="pink" icon="fa-solid fa-arrow-down").scorll-btn list
@@ -10,7 +10,6 @@
 import { reactive } from 'vue'
 import { api } from 'src/boot/axios'
 import { useQuasar } from 'quasar'
-import { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import SwiperModal from 'src/components/SwiperModal.vue'
 import 'swiper/css'
@@ -18,26 +17,19 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 const $q = useQuasar()
-const modules = reactive([Pagination])
 
-const breakpoints = {
-  slidesPerView: 1,
-  slidesPerGroup: 1,
-  spaceBetween: 10,
-  pagination: {
-    clickable: true
-  },
-  600: {
-    slidesPerView: 2,
-    slidesPerGroup: 2,
-    spaceBetween: 20
-  },
-  1024: {
-    slidesPerView: 3,
-    slidesPerGroup: 3,
-    spaceBetween: 20
-  }
-}
+// const breakpoints = {
+//   slidesPerView: 1,
+//   spaceBetween: 10,
+//   600: {
+//     slidesPerView: 3,
+//     spaceBetween: 10
+//   },
+//   1024: {
+//     slidesPerView: 3,
+//     spaceBetween: 10
+//   }
+// }
 
 const exhibitions = reactive([]);
 

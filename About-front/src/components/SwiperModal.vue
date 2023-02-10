@@ -1,7 +1,9 @@
 <template lang="pug">
 .swipwe-section
-  img.swipwe-img(:src="image")
-  q-chip.q-mt-xl(color="blue" size="xs") ＃{{ category }}
+  a(:href="'#/exhibitions/' + _id")
+    img.swipwe-img(:src="image")
+  <br>
+  q-chip.q-mt-lg(color="blue" size="xs") ＃{{ category }}
   h5 {{ title }}
   p {{ place }}
 </template>
@@ -42,6 +44,10 @@ defineProps({
   images: {
     type: [String],
     default: ''
+  },
+  price: {
+    type: Number,
+    default: 0
   },
   sell: {
     type: Boolean,

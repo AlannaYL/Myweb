@@ -1,4 +1,5 @@
 import users from '../models/users.js'
+import exhibitions from '../models/exhibitions.js'
 import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
@@ -73,11 +74,51 @@ export const getUser = (req, res) => {
       result: {
         account: req.user.account,
         email: req.user.email,
-        cart: req.user.cart.reduce((total, current) => total + current.quantity, 0),
-        role: req.user.role,
-        favorites: req.user.favorites
+        cart: req.user.cart,
+        role: req.user.role
       }
     })
+  } catch (error) {
+    res.status(500).json({ success: false, message: '未知錯誤' })
+  }
+}
+
+export const editCart = async (req, res) => {
+  try {
+    const idx = req.user.cart.findIndex(cart => cart.p_id.toString() === req.body.p_id)
+    if (idx > -1) {
+      const quantity = req.user.cart[idx].quantity + req.body.quantity
+      if (quantity <= 0) {
+        req.user.cart.splice(idx, 1)
+      } else {
+        req.user.cart[idx].quantity = quantity
+      }
+    } else {
+      const product = await exhibitions.findById(req.body.p_id)
+      if (!product || !product.sell) {
+        res.status(404).json({ success: false, message: '找不到' })
+        return
+      }
+      req.user.cart.push({
+        p_id: req.body.p_id,
+        quantity: req.body.quantity
+      })
+    }
+    await req.user.save()
+    res.status(200).json({ success: true, message: '', result: req.user.length })
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      res.status(400).json({ success: false, message: error.errors[Object.keys(error.errors)[0]].message })
+    } else {
+      res.status(500).json({ success: false, message: '未知錯誤' })
+    }
+  }
+}
+
+export const getCart = async (req, res) => {
+  try {
+    const result = await users.findById(req.user._id, 'cart').populate('cart.p_id')
+    res.status(200).json({ success: true, message: '', result: result.cart })
   } catch (error) {
     res.status(500).json({ success: false, message: '未知錯誤' })
   }

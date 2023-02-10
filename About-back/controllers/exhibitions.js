@@ -11,6 +11,7 @@ export const createExhibitions = async (req, res) => {
       description: req.body.description,
       image: req.files?.image?.[0]?.path || '',
       images: req.files?.images?.map(file => file.path) || [],
+      price: req.body.price,
       sell: req.body.sell,
       map: req.body.map,
       category: req.body.category
@@ -79,6 +80,7 @@ export const editExhibition = async (req, res) => {
     exhibition.description = req.body.description
     exhibition.image = req.files?.image?.[0]?.path || exhibition.image
     exhibition.images = images
+    exhibition.price = req.body.price
     exhibition.sell = req.body.sell
     exhibition.tag = req.body.tag
     exhibition.map = req.body.map

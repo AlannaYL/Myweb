@@ -20,7 +20,7 @@ import routes from 'src/router/routes'
 const links = [
   { icon: 'home', text: '返回首頁', to: '/' },
   { icon: 'home', text: '展覽管理', to: '/Admin' },
-  { icon: 'people', text: '會員管理', to: '/members' },
+  { icon: 'people', text: '會員管理', to: '/Adminmembers' },
   { icon: 'reorder', text: '訂單管理', to: '/orders' },
   { icon: 'dynamic_feed', text: '留言專區', to: '/texts' }
 ]

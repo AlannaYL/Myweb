@@ -33,6 +33,10 @@ const schema = new Schema({
     type: [String],
     default: []
   },
+  price: {
+    type: Number,
+    required: [true, '缺少價錢']
+  },
   sell: {
     type: Boolean,
     required: [true, '缺少狀態']

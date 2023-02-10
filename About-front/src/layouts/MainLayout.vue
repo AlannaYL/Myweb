@@ -1,7 +1,7 @@
 
 <template lang="pug">
 #index
-  q-layout.shadow-2(view='hHr lpR fFr' rounded-borders)
+  q-layout(view='hHr lpR fFr' rounded-borders)
     q-header.bg-white.text-black(reveal)
       q-toolbar
         q-avatar

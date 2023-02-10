@@ -37,7 +37,6 @@ export const useUserStore = defineStore('user', () => {
         color: 'pink'
       })
     } catch (error) {
-      console.log(error)
       Notify.create({
         message: '登入失敗',
         caption: error?.response?.data?.message || '發生錯誤',
@@ -77,6 +76,31 @@ export const useUserStore = defineStore('user', () => {
       logout()
     }
   }
+  // 加入購物車 ＝ 加入收藏
+  const editCart = async ({ _id, quantity }) => {
+    if (token.value.length === 0) {
+      Notify.create({
+        message: '加入失敗',
+        caption: '請先登入',
+        color: 'pink'
+      })
+      return
+    }
+    try {
+      const { data } = await apiAuth.post('/user/cart', { p_id: _id, quantity })
+      cart.value = data.result
+      Notify.create({
+        message: '放入購物車',
+        color: 'pink'
+      })
+    } catch (error) {
+      Notify.create({
+        message: '加入失敗',
+        caption: error?.response?.data?.message || '發生錯誤',
+        color: 'pink'
+      })
+    }
+  }
 
   return {
     token,
@@ -90,7 +114,8 @@ export const useUserStore = defineStore('user', () => {
     ShowLogin,
     getUser,
     login,
-    logout
+    logout,
+    editCart
   }
 }, {
   persist: {

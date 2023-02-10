@@ -48,9 +48,10 @@
                 div.absolute-full.flex.flex-center(v-if="form.delImages.includes(img)")
                   q-icon(name="delete")
               q-checkbox(v-model="form.delImages" :val="img")
-          q-file.col-12(v-model="form.images" filled stack-label label="選擇內容圖片" multiple)
+          q-file.col-12.q-mb-md(v-model="form.images" filled stack-label label="選擇內容圖片" multiple)
             template(v-slot:append)
               q-icon(name="close" @click="clears" class="cursor-pointer")
+          q-input.col-12.q-mb-md(v-model="form.price" filled type="number" prefix="$" label="請輸入價格" :rules="[rules.required]")
           q-checkbox.col-12(v-model="form.sell" label="上架" color="pink")
           q-input(v-model="form.map" label="地圖")
           q-select.col-12(v-model="form.category" filled :options="categories" label="請選擇覽展類別" :rules="[rules.required]")
@@ -134,6 +135,7 @@ const form = reactive({
   image: undefined,
   images: [],
   delImages: [],
+  price: 0,
   sell: false,
   map: undefined,
   category: '',
@@ -157,6 +159,7 @@ const openAdd = (idx) => {
     form.image = undefined
     form.images = []
     form.delImages = []
+    form.price = 0
     form.sell = false
     form.map = undefined
     form.category = ''
@@ -170,10 +173,11 @@ const openAdd = (idx) => {
     form.to = exhibitions[idx].to
     form.place = exhibitions[idx].place
     form.description = exhibitions[idx].description
-    form.image = undefined
+    form.image = exhibitions[idx].image
     form.images = []
     form.delImages = []
-    form.sell = false
+    form.price = exhibitions[idx].price
+    form.sell = exhibitions[idx].sell
     form.map = undefined
     form.category = exhibitions[idx].category
     form.loading = false
@@ -201,6 +205,7 @@ const onSubmit = async () => {
   for (const i of form.delImages) {
     fd.append('delImages', i)
   }
+  fd.append('price', form.price)
   fd.append('sell', form.sell)
   fd.append('map', form.map)
   fd.append('category', form.category)
