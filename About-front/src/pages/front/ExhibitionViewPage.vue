@@ -4,20 +4,24 @@
     img.img-width(:src="exhibitions.image")
   .text-section.co-12
     h1.col-12 {{ exhibitions.title }}
-    p.q-mt-xl.q-ml-xl.text-p {{ exhibitions.from + '' + '~' + '' + exhibitions.to }}
+    p.q-mt-xl.text-p {{ exhibitions.from + '' + '~' + '' + exhibitions.to }}
       .text-right
-        q-btn.btn(@click="editCart({_id: exhibitions._id, quantity: 1})" push round icon="fa-regular fa-heart" color="pink")
-        q-btn.btn( @click="Add = true" push rounded icon="fa-solid fa-cart-shopping" label="購票去" color="pink")
-    q-chip.q-ml-xl(color="blue" size="md") ＃{{ exhibitions.category }}
-    h2.col-12.q-ml-lg 【介紹】
-    p.q-mx-xl.q-mb-xl.q-pr-xxl.text-p.pre {{ exhibitions.description }}
+        q-btn.btn(push round icon="fa-regular fa-heart" color="pink")
+        q-btn.btn(@click="Add = true" push rounded icon="fa-solid fa-cart-shopping" label="加入購物車" color="pink")
+    q-chip(color="blue" size="md") ＃{{ exhibitions.category }}
+    h2.col-12 【介紹】
+    p.q-mb-xl.q-pr-xxl.text-p.pre {{ exhibitions.description }}
   .small-image.flex
     .col-3(v-for="img in exhibitions.images" :key="img")
       img(:src="img")
   q-dialog(v-model="Add")
-    q-card(style="width: 90%")
-      q-form
-        q-input.row.item-center(v-model.number="quantity" type="number" label="數量")
+    q-card(style="width: 60%")
+      q-form(@submit.prevent="submitCart").row
+        q-card-section.col-12
+          h6 {{ exhibitions.title }}
+        q-card-section.col-12
+          q-input(v-model.number="quantity" type="number" label="請選擇數量" :rules="[rules.required, rules.number]")
+          q-btn.q-mt-lg(push color="pink" label="加入購物車" type="submit")
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
@@ -32,15 +36,22 @@ const route = useRoute()
 const user = useUserStore()
 const { editCart } = user
 const Add = ref(false)
+const quantity = ref(0)
 
 const rules = {
   required (value) {
     return !!value || '欄位必填'
   },
   number (value) {
-    return value >= 0
+    return value >= 0 || '必須大於0'
   }
 }
+
+const submitCart = () => {
+  editCart({ _id: exhibitions._id, quantity: quantity.value })
+  Add.value = false
+}
+
 const exhibitions = reactive({
   _id: '',
   title: '',

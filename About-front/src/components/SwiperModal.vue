@@ -4,8 +4,10 @@
     img.swipwe-img(:src="image")
   <br>
   q-chip.q-mt-lg(color="blue" size="xs") ＃{{ category }}
-  h5 {{ title }}
-  p {{ place }}
+  .text
+    h5 {{ title }}
+    p {{ place }}
+    p {{ new Date(from).toLocaleDateString() + '~' + new Date(to).toLocaleDateString() }}
 </template>
 <script setup>
 defineProps({

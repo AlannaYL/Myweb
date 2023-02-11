@@ -90,7 +90,7 @@ export const useUserStore = defineStore('user', () => {
       const { data } = await apiAuth.post('/users/cart', { p_id: _id, quantity })
       cart.value = data.result
       Notify.create({
-        message: '放入購物車',
+        message: '加入購物車',
         color: 'pink'
       })
     } catch (error) {

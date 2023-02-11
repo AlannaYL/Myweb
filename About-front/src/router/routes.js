@@ -53,6 +53,16 @@ const routes = [
           login: false,
           admin: false
         }
+      },
+      {
+        path: '/Mycart',
+        name: 'product',
+        component: () => import('src/pages/front/CartViewPage.vue'),
+        meta: {
+          title: '會員',
+          login: false,
+          admin: false
+        }
       }
     ]
   },
