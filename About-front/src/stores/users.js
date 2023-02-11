@@ -89,13 +89,41 @@ export const useUserStore = defineStore('user', () => {
     try {
       const { data } = await apiAuth.post('/users/cart', { p_id: _id, quantity })
       cart.value = data.result
+      // Notify.create({
+      //   message: '加入購物車',
+      //   color: 'pink'
+      // })
+      if (quantity >= 1) {
+        Notify.create({
+          message: '已增加',
+          color: 'pink'
+        })
+      } else if (quantity < 0) {
+        Notify.create({
+          message: '已減少',
+          color: 'pink'
+        })
+      }
+    } catch (error) {
       Notify.create({
-        message: '加入購物車',
+        message: '加入失敗',
+        caption: error?.response?.data?.message || '發生錯誤',
+        color: 'pink'
+      })
+    }
+  }
+
+  const checkout = async () => {
+    try {
+      await apiAuth.post('/orders')
+      cart.value = 0
+      Notify.create({
+        message: '結帳成功',
         color: 'pink'
       })
     } catch (error) {
       Notify.create({
-        message: '加入失敗',
+        message: '失敗',
         caption: error?.response?.data?.message || '發生錯誤',
         color: 'pink'
       })

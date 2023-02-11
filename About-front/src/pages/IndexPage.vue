@@ -37,7 +37,6 @@ const exhibitions = reactive([]);
   try {
     const { data } = await api.get('/exhibitions')
     exhibitions.push(...data.result)
-    console.log(exhibitions)
   } catch (error) {
     $q.notify({
       message: '失敗',

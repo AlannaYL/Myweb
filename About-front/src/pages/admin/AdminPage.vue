@@ -4,7 +4,7 @@
   q-btn.q-mb-lg(label="新增展覽" @click="openAdd(-1)" push rounded color="blue" )
   q-btn.q-ml-lg.q-mb-lg(v-for="(name, i) in filterName" :key="i" :label="name" @click="filterCategory = name" push rounded color="blue")
   .col-12
-    q-table(:rows="filterData" :columns="columns" row-key="_id")
+    q-table.item-center(:rows="filterData" :columns="columns" row-key="_id")
       template(v-slot:body-cell-image="props")
         q-td
           img(:src="props.row.image" style="height: 100px")
