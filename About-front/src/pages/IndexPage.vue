@@ -1,6 +1,6 @@
 <template lang="pug">
 #Section_01
-  swiper.height(:modules="modules" :spaceBetween="1" :slidesPerView="'auto'" )
+  swiper.height(:modules="modules" :spaceBetween="10" :slidesPerView="'auto'" )
     swiper-slide(v-for="i in exhibitions")
       SwiperModal(v-bind="i")
   q-btn.scorll-btn(outline color="pink" icon="fa-solid fa-arrow-down") list

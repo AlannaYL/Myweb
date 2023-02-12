@@ -2,6 +2,9 @@
   height: calc(100vh - 50px)
   .swiper
     height: 100%
+    width: 77%
+    position: absolute
+    right: 0
   .swipwe-section
     margin: auto
     width: 100%
@@ -44,30 +47,29 @@
     font-size: 12px
   .q-icon
     font-size: 12px 
-  .swiper
-    width: 77%
-    position: absolute
-    right: 0
   h5
     margin: 1rem 0 
 
-@include md
-  .swipwe-section::before
-    top: 75px
-    left: 30px
-  h5
-    font-size: 24px 
-    margin: 1.2rem 0 
+#Section_01
+  @include md
+    .swipwe-section::before
+      top: 75px
+      left: 30px
+    h5
+      font-size: 24px 
+      margin: 1.2rem 0 
 
-@include lg
+#Section_01
+  @include lg
+    .swiper-slide
+      width: 600px !important
+    .swipwe-section::before
+      top: 82px !important
+      left: 45px
+
+#Section_01
   .swiper-slide
-    width: 600px !important
-  .swipwe-section::before
-    top: 82px !important
-    left: 45px
-
-.swiper-slide
-  margin-left: 100px !important
+    margin-left: 100px !important
 
 .text
   line-height: .7

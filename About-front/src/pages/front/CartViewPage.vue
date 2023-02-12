@@ -6,12 +6,15 @@
         template(v-slot:body-cell-image="props")
           q-td.text-center
             img(:src="props.row.p_id.image" style="height: 100px")
-        template(v-slot:body-cell-plus="props")
-          q-td.text-center
-            q-btn(@click="updateCart(props.row, 1)"  icon="fa-solid fa-plus" push round  color="pink")
         template(v-slot:body-cell-minus="props")
           q-td.text-center
-            q-btn(@click="updateCart(props.row, -1)" icon="fa-solid fa-minus"  push round )
+            q-btn(@click="updateCart(props.row, -1)"  icon="fa-solid fa-minus" push round  color="pink")
+        template(v-slot:body-cell-plus="props")
+          q-td.text-center
+            q-btn(@click="updateCart(props.row, 1)" icon="fa-solid fa-plus"  push round )
+        template(v-slot:body-cell-edit="props")
+          q-td.text-center
+            q-btn(color="red" @click="updateCart(props.row, props.row.quantity*-1)") 刪除
 </template>
 <script setup>
 import { apiAuth } from 'src/boot/axios'
@@ -45,7 +48,7 @@ const columns = [
     align: 'center'
   },
   {
-    name: 'plus',
+    name: 'minus',
     label: '',
     align: 'center'
   },
@@ -55,8 +58,9 @@ const columns = [
     field: 'quantity',
     align: 'center'
   },
+
   {
-    name: 'minus',
+    name: 'plus',
     label: '',
     align: 'center'
   },
@@ -64,6 +68,11 @@ const columns = [
     namer: 'total',
     label: '小計',
     field: row => row.quantity * row.p_id.price,
+    align: 'center'
+  },
+  {
+    name: 'edit',
+    label: '',
     align: 'center'
   }
 ]
