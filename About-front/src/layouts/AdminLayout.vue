@@ -4,8 +4,8 @@
     q-drawer(show-if-above :width="240")
       q-scroll-area.fit.bg-color
         .row
-          .col-12.q-pa-xxl.text-center.column(v-for="link in links" )
-            q-btn(:disable="link.to === route.path" :icon="link.icon" :to="link.to" push rounded color="blue") {{ link.text }}
+          .col-12.q-pa-xxl.text-center.column(v-for="link in links")
+            q-btn(:disable="link.to === route.path" :icon="link.icon" :to="link.to" flat rounded color="white") {{ link.text }}
     q-page-container
       q-page(padding)
         router-view
@@ -22,7 +22,7 @@ const links = [
   { icon: 'home', text: '展覽管理', to: '/Admin' },
   { icon: 'people', text: '會員管理', to: '/Adminmembers' },
   { icon: 'reorder', text: '訂單管理', to: '/orders' },
-  { icon: 'dynamic_feed', text: '留言專區', to: '/texts' }
+  { icon: 'dynamic_feed', text: '關於我們', to: '/Adminabout' }
 ]
 
 const user = useUserStore()

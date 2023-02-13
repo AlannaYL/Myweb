@@ -92,6 +92,15 @@ const routes = [
           login: true,
           admin: true
         }
+      },
+      {
+        path: '/Adminabout',
+        name: 'Adminabout',
+        component: () => import('src/pages/admin/AboutsPage.vue'),
+        meta: {
+          login: true,
+          admin: true
+        }
       }
     ]
   },
