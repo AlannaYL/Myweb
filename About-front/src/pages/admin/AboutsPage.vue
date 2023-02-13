@@ -2,16 +2,16 @@
 #Admin-about.row
   h4.text-center.col-12 關於我們
   q-card.col-6.margin-auto
-    q-form.q-pa-md(submit="onSubmit")
+    q-form.q-pa-md(@submit="onSubmit")
       q-input.q-mb-md(v-model="form.content" label="請輸入第一段內容" filled)
       q-input(v-model="form.description" label="請輸入第二段內容" filled)
       .row
         p 圖片預覽
-        .col-12(v-if="abouts" v-for="img in abouts[form]?.images" :key="img")
+        .col-12(v-for="img in abouts[form]?.images" :key="img")
           q-img.full-width(:src="img")
             div.absolute-full.flex.flex-center(v-if="form.delImages.includes(img)")
               q-icon(name="delete")
-      q-checkbox(v-model="form.delImages" :val="img")
+          q-checkbox(v-model="form.delImages" :val="img")
       q-file.col-12.q-mb-md(v-model="form.images" filled stack-label label="選擇內容圖片" multiple :label="選擇內容圖片")
       q-btn.q-my-lg(label="編輯關於我們" type="submit" push rounded color="pink" )
 
@@ -28,12 +28,10 @@ const form = reactive({
   content: '',
   images: [],
   delImages: [],
-  description: '',
-  dialog: false
+  description: ''
 })
 
 const onSubmit = async () => {
-  form.loading = true
   const fd = new FormData()
   fd.append('content', form.content)
   for (const i of form.images) {
@@ -44,7 +42,7 @@ const onSubmit = async () => {
   }
   fd.append('description', form.description)
   try {
-    const { data } = await apiAuth.patch('/abouts/')
+    const { data } = await apiAuth.patch('/abouts/', fd)
     abouts[form] = (data.result)
     $q.notify({
       message: '編輯成功',
@@ -63,6 +61,7 @@ const onSubmit = async () => {
   try {
     const { data } = await apiAuth.get('/abouts/')
     abouts.push(...data.result)
+    console.log(abouts)
     form.content = abouts[0].content
     form.images = abouts[0].images
     form.delImages = []

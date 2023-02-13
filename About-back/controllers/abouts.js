@@ -22,6 +22,7 @@ export const editAbouts = async (req, res) => {
     about.images = images
     about.description = req.body.description
     await about.save()
+    res.status(200).json({ success: true, message: '', result: about })
   } catch (error) {
     if (error.name === 'ValidationError') {
       res.status(400).json({ success: false, message: error.errors[Object.keys(error.errors)[0]].message })
