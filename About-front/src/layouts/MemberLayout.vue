@@ -1,4 +1,5 @@
 <template lang="pug">
+#MemberPage
 q-layout(view="hHh lpR fFf")
   q-drawer.bg-color(show-if-above :width="240")
     q-scroll-area.fit
@@ -6,6 +7,9 @@ q-layout(view="hHh lpR fFf")
         li.q-pa-md.text-center.column(v-for="link in links")
           .col
             q-btn(:icon="link.icon" :to="link.to" push rounded color="blue") {{ link.text }}
+  q-page-container
+    q-page(padding)
+      router-view
 </template>
 <script setup>
 const links = [

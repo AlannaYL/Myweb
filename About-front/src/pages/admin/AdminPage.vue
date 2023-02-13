@@ -1,7 +1,7 @@
 <template lang="pug">
 #Admin-exhibitions.row
   h4.text-center.col-12 展覽管理
-  q-btn.q-mb-lg(label="新增展覽" @click="openAdd(-1)" push rounded color="blue" )
+  q-btn.q-mb-lg(label="新增展覽" @click="openAdd(-1)" push rounded color="pink" )
   q-btn.q-ml-lg.q-mb-lg(v-for="(name, i) in filterName" :key="i" :label="name" @click="filterCategory = name" push rounded color="blue")
   .col-12
     q-table.item-center(:rows="filterData" :columns="columns" row-key="_id")

@@ -18,7 +18,6 @@ export const createExhibitions = async (req, res) => {
     })
     res.status(200).json({ success: true, message: '', result })
   } catch (error) {
-    console.log(error)
     if (error.name === 'ValidationError') {
       res.status(400).json({ success: false, message: error.errors[Object.keys(error.errors)[0]].message })
     } else {

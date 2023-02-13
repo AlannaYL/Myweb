@@ -35,16 +35,6 @@ const routes = [
         }
       },
       {
-        path: 'Member',
-        name: 'Member',
-        component: () => import('src/pages/front/MemberPage.vue'),
-        meta: {
-          title: '會員',
-          login: true,
-          admin: false
-        }
-      },
-      {
         path: 'Exhibitions/:id',
         name: 'ExhibitionView',
         component: () => import('src/pages/front/ExhibitionViewPage.vue'),
@@ -102,6 +92,23 @@ const routes = [
           login: true,
           admin: true
         }
+      }
+    ]
+  },
+  {
+    path: '/Member',
+    name: 'Member',
+    component: () => import('src/layouts/MemberLayout.vue'),
+    meta: {
+      title: '會員',
+      login: true,
+      admin: false
+    },
+    children: [
+      {
+        path: '',
+        name: 'MemberHome',
+        component: () => import('src/pages/members/MemberPage.vue')
       }
     ]
   },

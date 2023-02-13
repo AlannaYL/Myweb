@@ -9,14 +9,26 @@
         .item
           li
             .space
-            a(href="#/") 首頁
+            RouterLink(to="/") 首頁
         .item
           li
-            a(href="#/About") 關於
+            RouterLink(to="/About") 關於
         .item
           li
-            a(href="#/Exhibitions") 展覽
+            RouterLink(to="/Exhibitions") 展覽
         .item
           li
-            a(href="#/Member") 會員
+            RouterLink(v-if="isAdmin" to="/Admin") 管理
+            RouterLink(v-else to="/Member") 會員
 </template>
+
+<script setup>
+import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from 'src/stores/users'
+const route = useRoute()
+
+const user = useUserStore()
+const { isAdmin } = storeToRefs(user)
+
+</script>

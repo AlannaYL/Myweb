@@ -34,7 +34,6 @@ import RegisterModal from 'components/RegisterModal.vue'
 import LoginModal from 'components/LoginModal.vue'
 
 const showRegister = ref(false)
-
 const user = useUserStore()
 const { isLogin, isAdmin, ShowLogin, cart } = storeToRefs(user)
 const { logout } = user

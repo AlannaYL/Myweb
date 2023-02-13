@@ -8,10 +8,10 @@
             img(:src="props.row.p_id.image" style="height: 100px")
         template(v-slot:body-cell-minus="props")
           q-td.text-center
-            q-btn(@click="updateCart(props.row, -1)"  icon="fa-solid fa-minus" push round  color="pink")
+            q-btn(@click="updateCart(props.row, -1)"  icon="fa-solid fa-minus" push round )
         template(v-slot:body-cell-plus="props")
           q-td.text-center
-            q-btn(@click="updateCart(props.row, 1)" icon="fa-solid fa-plus"  push round )
+            q-btn(@click="updateCart(props.row, 1)" icon="fa-solid fa-plus"  push round  color="pink")
         template(v-slot:body-cell-edit="props")
           q-td.text-center
             q-btn(color="red" @click="updateCart(props.row, props.row.quantity*-1)") 刪除
