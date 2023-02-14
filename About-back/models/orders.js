@@ -22,6 +22,10 @@ const schema = new Schema({
     type: [orderSchema],
     default: []
   },
+  date: {
+    type: Date,
+    default: Date.now
+  },
   state: {
     type: String,
     enum: {
