@@ -40,31 +40,31 @@ const filterCard = () => {
 }
 
 const user = useUserStore()
-const { isLogin } = storeToRefs(user)
+const { isLogin } = storeToRefs(user);
 
-const editLove = async () => {
-  try {
-    const { data } = await apiAuth.post('/users/love', { p_id: route.params.id, love: !love.value })
-    love.value = !love.value
-    if (love.value === true) {
-      $q.notify({
-        message: '加入收藏',
-        color: 'pink'
-      })
-    } else {
-      $q.notify({
-        message: '移除收藏',
-        color: 'pink'
-      })
-    }
-  } catch (error) {
-    $q.notify({
-      message: '失敗',
-      caption: error?.response?.data?.message || '發生錯誤',
-      color: 'pink'
-    })
-  }
-};
+// const editLove = async () => {
+//   try {
+//     const { data } = await apiAuth.post('/users/love', { p_id: route.params.id, love: !love.value })
+//     love.value = !love.value
+//     if (love.value === true) {
+//       $q.notify({
+//         message: '加入收藏',
+//         color: 'pink'
+//       })
+//     } else {
+//       $q.notify({
+//         message: '移除收藏',
+//         color: 'pink'
+//       })
+//     }
+//   } catch (error) {
+//     $q.notify({
+//       message: '失敗',
+//       caption: error?.response?.data?.message || '發生錯誤',
+//       color: 'pink'
+//     })
+//   }
+// }
 
 (async () => {
   try {

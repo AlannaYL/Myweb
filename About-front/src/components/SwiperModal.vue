@@ -3,15 +3,24 @@
   a(:href="'#/exhibitions/' + _id")
     img.swipwe-img(:src="image")
   <br>
-  .row.justify-between.items-center
-    q-chip.q-mt-lg(color="blue" size="xs") ＃{{ category }}
-    q-btn(:icon="love ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" @click="editLove({_id: _id})" push round color="pink")
+  //- .row.justify-between.items-center
+  q-chip.q-mt-lg(color="blue" size="xs") ＃{{ category }}
+    //- q-btn(:icon="love ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" @click="loveClick()" push round color="pink")
   .text
     h5 {{ title }}
     p {{ place }}
     p {{ new Date(from).toLocaleDateString() + '~' + new Date(to).toLocaleDateString() }}
 </template>
 <script setup>
+import { ref } from 'vue'
+// const love = ref(false)
+
+// const emit = defineEmits(['editLove'])
+// const loveClick = () => {
+//   emit('editLove', 111)
+//   love.value = !love.value
+// }
+
 defineProps({
   _id: {
     type: String,
