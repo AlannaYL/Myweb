@@ -3,7 +3,9 @@
   a(:href="'#/exhibitions/' + _id")
     img.swipwe-img(:src="image")
   <br>
-  q-chip.q-mt-lg(color="blue" size="xs") ＃{{ category }}
+  .row.justify-between.items-center
+    q-chip.q-mt-lg(color="blue" size="xs") ＃{{ category }}
+    q-btn(:icon="love ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" @click="editLove({_id: _id})" push round color="pink")
   .text
     h5 {{ title }}
     p {{ place }}

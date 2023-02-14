@@ -6,7 +6,7 @@
     h1.col-12 {{ exhibitions.title }}
     p.q-mt-xl.text-p {{ exhibitions.from + '' + '~' + '' + exhibitions.to }}
       .text-right
-        q-btn.btn(push round icon="fa-regular fa-heart" color="pink")
+        q-btn.btn(@click="editLove({_id: exhibitions._id})" round :icon="love ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" color="pink")
         q-btn.btn(@click="Add = true" push rounded icon="fa-solid fa-cart-shopping" label="加入購物車" color="pink")
     q-chip(color="blue" size="md") ＃{{ exhibitions.category }}
     h2.col-12 【介紹】
@@ -25,9 +25,10 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-import { api } from 'src/boot/axios'
+import { api, apiAuth } from 'src/boot/axios'
 import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
+import { storeToRefs } from 'pinia'
 import router from 'src/router'
 import { useUserStore } from 'src/stores/users'
 
@@ -35,8 +36,10 @@ const $q = useQuasar()
 const route = useRoute()
 const user = useUserStore()
 const { editCart } = user
+const { isLogin } = storeToRefs(user)
 const Add = ref(false)
 const quantity = ref(0)
+const love = ref(false)
 
 const rules = {
   required (value) {
@@ -67,7 +70,31 @@ const exhibitions = reactive({
   sell: true,
   map: undefined,
   category: ''
-});
+})
+
+const editLove = async () => {
+  try {
+    const { data } = await apiAuth.post('/users/love', { p_id: route.params.id, love: !love.value })
+    love.value = !love.value
+    if (love.value === true) {
+      $q.notify({
+        message: '加入收藏',
+        color: 'pink'
+      })
+    } else {
+      $q.notify({
+        message: '移除收藏',
+        color: 'pink'
+      })
+    }
+  } catch (error) {
+    $q.notify({
+      message: '失敗',
+      caption: error?.response?.data?.message || '發生錯誤',
+      color: 'pink'
+    })
+  }
+}
 
 (async () => {
   const { data } = await api.get('/exhibitions/' + route.params.id)
@@ -87,6 +114,11 @@ const exhibitions = reactive({
     exhibitions.map = data.result.map
     exhibitions.category = data.result.category
     document.title = 'About | ' + data.result.title
+
+    if (isLogin.value) {
+      const { data } = await apiAuth.get('/users/love/' + route.params.id)
+      love.value = data.result
+    }
   } catch (error) {
     $q.notify({
       message: '取得失敗',

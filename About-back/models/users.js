@@ -14,14 +14,6 @@ const cartSchema = new Schema({
   }
 })
 
-const loveSchema = new Schema({
-  p_id: {
-    type: ObjectId,
-    ref: 'exhibitions',
-    required: [true, '缺少商品']
-  }
-})
-
 const schema = new Schema({
   account: {
     type: String,
@@ -61,8 +53,10 @@ const schema = new Schema({
     default: []
   },
   love: {
-    type: [loveSchema],
-    default: []
+    type: [ObjectId],
+    default: [],
+    ref: 'exhibitions',
+    required: [true, '缺少ID']
   },
   role: {
     type: Boolean,

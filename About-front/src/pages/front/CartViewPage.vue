@@ -14,7 +14,10 @@
             q-btn(@click="updateCart(props.row, 1)" icon="fa-solid fa-plus"  push round  color="pink")
         template(v-slot:body-cell-edit="props")
           q-td.text-center
-            q-btn(color="red" @click="updateCart(props.row, props.row.quantity*-1)") 刪除
+            q-btn(color="red" @click="updateCart(props.row, props.row.quantity*-1)" push) 刪除
+    .col-12.text-center
+      p 總金額 {{ totalPrice }}
+      q-btn(color="blue" :disabled="!canCheckout" @click="onCheckoutBtnClick" push) 結帳
 </template>
 <script setup>
 import { apiAuth } from 'src/boot/axios'
@@ -91,7 +94,20 @@ const updateCart = async (row, quantity) => {
 const onCheckoutBtnClick = async () => {
   await checkout()
   router.push('/orders')
-};
+}
+
+const totalPrice = computed(() => {
+  return carts.reduce((total, current) => {
+    return total + (current.p_id.price * current.quantity)
+  }, 0)
+})
+
+const canCheckout = computed(() => {
+  return carts.length > 0 && !carts.some(product => {
+    return !product.p_id.sell
+  })
+});
+
 (async () => {
   try {
     const { data } = await apiAuth.get('/users/cart')

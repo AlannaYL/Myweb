@@ -50,7 +50,7 @@ const routes = [
         component: () => import('src/pages/front/CartViewPage.vue'),
         meta: {
           title: '會員',
-          login: false,
+          login: true,
           admin: false
         }
       }
@@ -118,6 +118,16 @@ const routes = [
         path: '',
         name: 'MemberHome',
         component: () => import('src/pages/members/MemberPage.vue')
+      },
+      {
+        path: '/Myorder',
+        name: 'MemberOrder',
+        component: () => import('src/pages/members/MyorderPage.vue')
+      },
+      {
+        path: '/Myfavorites',
+        name: 'Memberfavorites',
+        component: () => import('src/pages/members/MyfavoritesPage.vue')
       }
     ]
   },

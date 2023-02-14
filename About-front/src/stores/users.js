@@ -76,7 +76,7 @@ export const useUserStore = defineStore('user', () => {
       logout()
     }
   }
-  // 加入購物車 ＝ 加入收藏
+
   const editCart = async ({ _id, quantity }) => {
     if (token.value.length === 0) {
       Notify.create({
@@ -130,6 +130,31 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  const editLove = async ({ _id }) => {
+    if (token.value.length === 0) {
+      Notify.create({
+        message: '加入失敗',
+        caption: '請先登入',
+        color: 'pink'
+      })
+      return
+    }
+    try {
+      // loves.value.push(...loveData.result)
+      const { data } = await apiAuth.post('/users/love', { p_id: _id })
+      Notify.create({
+        message: '加入收藏',
+        color: 'pink'
+      })
+    } catch (error) {
+      Notify.create({
+        message: '加入失敗',
+        caption: error?.response?.data?.message || '發生錯誤',
+        color: 'pink'
+      })
+    }
+  }
+
   return {
     token,
     account,
@@ -143,7 +168,9 @@ export const useUserStore = defineStore('user', () => {
     getUser,
     login,
     logout,
-    editCart
+    editCart,
+    checkout,
+    editLove
   }
 }, {
   persist: {

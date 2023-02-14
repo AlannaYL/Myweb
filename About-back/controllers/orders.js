@@ -8,7 +8,7 @@ export const createOrder = async (req, res) => {
       return
     }
     let result = await users.findById(req.user._id, 'cart').populate('cart.p_id')
-    const canCheckout = result.cart.every(cart => cart.item.sell)
+    const canCheckout = result.cart.every(cart => cart.p_id.sell)
     if (!canCheckout) {
       res.status(400).json({ success: false, message: '有下架商品' })
       return
@@ -21,6 +21,7 @@ export const createOrder = async (req, res) => {
     if (error.name === 'ValidationError') {
       res.status(400).json({ success: false, message: error.errors[Object.keys(error.errors)[0]].message })
     } else {
+      console.log(error)
       res.status(500).json({ success: false, message: '未知錯誤' })
     }
   }

@@ -15,8 +15,8 @@ q-layout(view="hHh lpR fFf")
 const links = [
   { icon: 'fa-solid fa-rotate-left', text: '返回首頁', to: '/' },
   { icon: 'shop', text: '去購物車', to: '/Mycart' },
-  { icon: 'fa-solid fa-file', text: '我的訂單' },
-  { icon: 'fa-solid fa-bookmark', text: '我的收藏' }
+  { icon: 'fa-solid fa-file', text: '我的訂單', to: '/Myorder' },
+  { icon: 'fa-solid fa-bookmark', text: '我的收藏', to: '/Myfavorites' }
 ]
 </script>
 <style lang="scss">

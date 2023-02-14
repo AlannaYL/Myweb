@@ -14,9 +14,12 @@
 
 </template>
 <script setup>
-import { api } from 'src/boot/axios'
+import { api, apiAuth } from 'src/boot/axios'
 import { useQuasar } from 'quasar'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useUserStore } from 'src/stores/users'
+import { storeToRefs } from 'pinia'
 import SwiperModal from 'components/SwiperModal.vue'
 import CardModel from 'components/CardModel.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -24,6 +27,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
+const route = useRoute()
+const love = ref(false)
 const $q = useQuasar()
 
 const exhibitions = reactive([])
@@ -33,12 +38,42 @@ const filterView = () => {
 const filterCard = () => {
   return exhibitions.filter(item => item.category === '活動')
 }
-;
+
+const user = useUserStore()
+const { isLogin } = storeToRefs(user)
+
+const editLove = async () => {
+  try {
+    const { data } = await apiAuth.post('/users/love', { p_id: route.params.id, love: !love.value })
+    love.value = !love.value
+    if (love.value === true) {
+      $q.notify({
+        message: '加入收藏',
+        color: 'pink'
+      })
+    } else {
+      $q.notify({
+        message: '移除收藏',
+        color: 'pink'
+      })
+    }
+  } catch (error) {
+    $q.notify({
+      message: '失敗',
+      caption: error?.response?.data?.message || '發生錯誤',
+      color: 'pink'
+    })
+  }
+};
 
 (async () => {
   try {
     const { data } = await api.get('/exhibitions')
     exhibitions.push(...data.result)
+    if (isLogin.value) {
+      const { data: loveData } = await apiAuth.get('/users/love')
+      love.value = loveData.result
+    }
   } catch (error) {
     $q.notify({
       message: '失敗',

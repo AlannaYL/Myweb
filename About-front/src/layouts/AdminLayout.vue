@@ -18,11 +18,11 @@ import routes from 'src/router/routes'
 import { useRoute } from 'vue-router'
 
 const links = [
-  { icon: 'home', text: '返回首頁', to: '/' },
-  { icon: 'home', text: '展覽管理', to: '/Admin' },
-  { icon: 'people', text: '會員管理', to: '/Adminmembers' },
-  { icon: 'reorder', text: '訂單管理', to: '/orders' },
-  { icon: 'dynamic_feed', text: '關於我們', to: '/Adminabout' }
+  { icon: 'fa-solid fa-rotate-left', text: '返回首頁', to: '/' },
+  { icon: 'fa-solid fa-file-lines', text: '展覽管理', to: '/Admin' },
+  { icon: 'fa-solid fa-users', text: '會員管理', to: '/Adminmembers' },
+  { icon: 'fa-solid fa-list', text: '訂單管理', to: '/orders' },
+  { icon: 'fa-regular fa-comment', text: '關於我們', to: '/Adminabout' }
 ]
 
 const user = useUserStore()

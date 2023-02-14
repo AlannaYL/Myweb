@@ -7,12 +7,11 @@
         q-avatar
         q-toolbar-title 我不可愛
         .q-gutter-x-md
+          q-btn(v-if="isLogin" @click="logout" icon='fa-solid fa-person-through-window' push round color="white" text-color="black")
           q-btn(v-if="!isAdmin" to="/Mycart" icon='fa-solid fa-cart-shopping' push round color="white" text-color="black")
             q-badge(:label="cart" rounded floating color="pink")
-          q-btn(v-if="isLogin" @click="logout" icon='fa-solid fa-person-through-window' push round color="white" text-color="black")
           q-btn(v-if="isLogin && isAdmin" to="/Admin" icon='fa-solid fa-eye' @click="ShowLogin = true" push round color="white" text-color="black")
           q-btn(v-if="!isLogin" icon='face' @click="ShowLogin = true" push round color="white" text-color="black")
-          q-btn(icon='fa-solid fa-magnifying-glass' push round color="white" text-color="black")
           q-btn(to="/Menu" icon='fa-solid fa-bars' push round color="white" text-color="black")
     q-page-container
       q-page
