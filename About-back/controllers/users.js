@@ -161,3 +161,29 @@ export const getLoveById = (req, res) => {
     res.status(500).json({ success: false, message: '未知錯誤' })
   }
 }
+
+export const getAllUser = async (req, res) => {
+  try {
+    const result = await users.find().select('-password')
+    res.status(200).json({
+      success: true,
+      message: '',
+      result
+    })
+  } catch (error) {
+    res.status(500).json({ success: false, message: '未知錯誤' })
+  }
+}
+
+export const edituser = async (req, res) => {
+  try {
+    const data = {
+      account: req.body.account,
+      email: req.body.email
+    }
+    const result = await users.findByIdAndUpdate(req.body._id, data, { new: true }).select('-password')
+    res.status(200).json({ success: true, message: '', result })
+  } catch (error) {
+    res.status(500).json({ success: false, message: '未知錯誤' })
+  }
+}

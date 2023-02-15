@@ -242,7 +242,11 @@ const onSubmit = async () => {
     const { data } = await apiAuth.get('/exhibitions/all')
     exhibitions.push(...data.result)
   } catch (error) {
-
+    $q.notify({
+      message: '取得失敗',
+      caption: error?.response?.data?.message || '發生錯誤',
+      color: 'pink'
+    })
   }
 })()
 

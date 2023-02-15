@@ -119,6 +119,7 @@ const editLove = async () => {
       const { data } = await apiAuth.get('/users/love/' + route.params.id)
       love.value = data.result
     }
+    console.log(data)
   } catch (error) {
     $q.notify({
       message: '取得失敗',
