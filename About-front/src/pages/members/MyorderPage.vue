@@ -3,7 +3,7 @@
   .row
     .col-12
       q-table.item-center(:rows="orders" :columns="columns" row-key="_id")
-        template(v-slot:body-cell-happy="props")
+        template(v-slot:body-cell-number="props")
           q-td.text-center
             template(v-for="product in props.row.products")
               p {{ product.quantity + "張" + product.p_id.title }}
@@ -23,7 +23,7 @@ const columns = [
     align: 'center'
   },
   {
-    name: 'happy',
+    name: 'number',
     label: '數量',
     align: 'center'
   },
@@ -31,11 +31,6 @@ const columns = [
     name: 'total',
     label: '小計',
     field: row => row.totalPrice,
-    align: 'center'
-  },
-  {
-    name: 'edit',
-    label: '',
     align: 'center'
   }
 ]
