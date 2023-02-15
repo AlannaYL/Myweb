@@ -8,7 +8,7 @@
           img(:src="props.row.image" style="height: 100px")
       template(v-slot:body-cell-link="props")
         q-td.text-center
-          q-btn(icon="fa-solid fa-arrow-up-right-from-square" :to="props.row._id" push round color="pink")
+          q-btn(icon="fa-solid fa-arrow-up-right-from-square" :to="'exhibitions/' + props.row._id" push round color="pink")
 </template>
 <script setup>
 import { apiAuth } from 'src/boot/axios'
