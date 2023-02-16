@@ -181,7 +181,8 @@ export const edituser = async (req, res) => {
     const result = await users.findByIdAndUpdate(req.body._id, {
       account: req.body.account,
       email: req.body.email
-    }, { new: true }).select('-password')
+    }
+    const result = await users.findByIdAndUpdate(req.body._id, data, { new: true }).select('-password')
     res.status(200).json({ success: true, message: '', result })
   } catch (error) {
     res.status(500).json({ success: false, message: '未知錯誤' })

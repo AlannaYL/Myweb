@@ -3,9 +3,10 @@
 q-layout(view="hHh lpR fFf")
   q-drawer.bg-color(show-if-above :width="240")
     q-scroll-area.fit
-      ul.q-pa-md.q-my-xl
-        q-card.q-pa-md
-          h6.text-center 我的資訊
+      ul.q-pl-xs.q-my-xl
+        li.text-center
+          h6 我的資訊
+        li.firstli.q-mt-lg
           div(style="height: 150px")
             .bg-transparent
               q-avatar.q-mb-sm(size="56px")
