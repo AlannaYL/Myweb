@@ -62,11 +62,11 @@ const onSubmit = async () => {
   form.loading = true
   // 建立一個新的 formdata 物件
   // fd.append(key, value)
-  const fd = new FormData()
-  fd.append('account', form.account)
-  fd.append('email', form.email)
+  // const fd = new FormData()
+  // fd.append('account', form.account)
+  // fd.append('email', form.email)
   try {
-    const { data } = await apiAuth.patch('/users/edituser', fd)
+    const { data } = await apiAuth.patch('/users/edituser', form)
     members[form.idx] = (data.result)
     $q.notify({
       message: '編輯成功',
