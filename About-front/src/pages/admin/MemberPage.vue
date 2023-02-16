@@ -2,7 +2,7 @@
 #AdminMember
   h4.text-center.col-12 會員管理
   .row.q-px-xl
-    .q-pa-md.items-center.col-md-4.col-xs-12(v-for="user in members")
+    .q-pa-md.items-center.col-md-4.col-xs-12(v-for="(user,i) in members" :key="i")
       q-card
         q-card-section(horizontal)
           q-img.q-ma-md(:src="`https://source.boringavatars.com/beam/${user.account}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`" width="70px" height="70px")
@@ -62,12 +62,13 @@ const onSubmit = async () => {
   form.loading = true
   // 建立一個新的 formdata 物件
   // fd.append(key, value)
-  const fd = new FormData()
-  fd.append('account', form.account)
-  fd.append('email', form.email)
+  // const fd = new FormData()
+  // fd.append('account', form.account)
+  // fd.append('email', form.email)
   try {
-    const { data } = await apiAuth.patch('/users/edituser', fd)
-    members[form.idx] = (data.result)
+    const { data } = await apiAuth.patch('/users/edituser', form)
+    members[form.idx] = data.result
+    console.log(data)
     $q.notify({
       message: '編輯成功',
       color: 'pink'

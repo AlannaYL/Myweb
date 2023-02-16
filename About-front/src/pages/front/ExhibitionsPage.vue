@@ -7,7 +7,9 @@
       swiper.height(:modules="modules" :spaceBetween="30" :slidesPerView="3" )
         swiper-slide(v-for="i in filterView()")
           SwiperModal(v-bind="i")
-    .col-12.q-mt-lg
+    .c0l-12
+      h5 當期展覽
+    .col-12.q-my-lg
       swiper(:modules="modules" :spaceBetween="30" :slidesPerView="3")
         swiper-slide(v-for="i in filterCard()")
           CardModel(v-bind="i")
