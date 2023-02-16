@@ -1,13 +1,12 @@
 <template lang="pug">
 .card-section
 q-card(style="height: 280px")
-  a(:href="'#/exhibitions/'+ _id")
+  RouterLink(:to='"/Exhibitions/" + _id')
     q-img(:src="image")
-      div.text-h5.absolute-bottom.text-right.color-pink {{ title }}
-  <br>
-  .text.q-mt-md
-    p {{ place }}
-    p {{ new Date(from).toLocaleDateString() + '~' + new Date(to).toLocaleDateString() }}
+      div.text-h5.absolute-bottom.text-right.color-pink
+        p {{ title }}
+        p {{ place }}
+        p {{ new Date(from).toLocaleDateString() + '~' + new Date(to).toLocaleDateString() }}
 </template>
 <script setup>
 defineProps({

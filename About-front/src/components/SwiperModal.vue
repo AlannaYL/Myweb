@@ -1,10 +1,10 @@
 <template lang="pug">
 .swipwe-section
-  a(:href="'#/exhibitions/' + _id")
+  RouterLink(:to='"/Exhibitions/" + _id')
     img.swipwe-img(:src="image")
   <br>
   //- .row.justify-between.items-center
-  q-chip.q-mt-lg(color="blue" size="xs") ＃{{ category }}
+  .border.q-mt-lg ＃{{ category }}
     //- q-btn(:icon="love ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" @click="loveClick()" push round color="pink")
   .text
     h5 {{ title }}
@@ -13,6 +13,9 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
 // const love = ref(false)
 
 // const emit = defineEmits(['editLove'])

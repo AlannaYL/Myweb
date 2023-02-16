@@ -1,10 +1,21 @@
 <template lang="pug">
 #Section_01
   swiper.height(:modules="modules" :spaceBetween="10" :slidesPerView="'auto'" )
-    swiper-slide(v-for="i in exhibitions")
+    swiper-slide(v-for="i in filterView()")
       SwiperModal(v-bind="i")
   q-btn.scorll-btn(outline color="pink" icon="fa-solid fa-arrow-down") list
-
+#Section_02
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
+  h1 早安你好
 </template>
 <script setup>
 import { reactive } from 'vue'
@@ -31,9 +42,13 @@ const $q = useQuasar()
 //   }
 // }
 
-const exhibitions = reactive([]);
+const exhibitions = reactive([])
 
-(async () => {
+const filterView = () => {
+  return exhibitions.filter(item => item.category === '展覽')
+}
+
+;(async () => {
   try {
     const { data } = await api.get('/exhibitions')
     exhibitions.push(...data.result)

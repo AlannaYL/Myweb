@@ -177,7 +177,7 @@ export const getAllUser = async (req, res) => {
 
 export const edituser = async (req, res) => {
   try {
-    console.log(req)
+    // console.log(req)
     const result = await users.findByIdAndUpdate(req.body._id, {
       account: req.body.account,
       email: req.body.email

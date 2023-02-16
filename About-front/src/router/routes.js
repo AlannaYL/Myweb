@@ -39,7 +39,7 @@ const routes = [
         name: 'ExhibitionView',
         component: () => import('src/pages/front/ExhibitionViewPage.vue'),
         meta: {
-          title: '會員',
+          title: '展覽',
           login: false,
           admin: false
         }
