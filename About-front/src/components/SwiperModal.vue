@@ -1,6 +1,6 @@
 <template lang="pug">
 .swipwe-section
-  RouterLink(:to='"/Exhibitions/" + _id')
+  RouterLink(:to='"/exhibitions/" + _id')
     img.swipwe-img(:src="image")
   <br>
   //- .row.justify-between.items-center
