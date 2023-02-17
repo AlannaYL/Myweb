@@ -4,8 +4,11 @@
   q-layout(view='hHr lpR fFr' rounded-borders)
     q-header.bg-white.text-black(reveal)
       q-toolbar
-        q-avatar
-        q-toolbar-title 我不可愛
+        RouterLink#logo(to="/")
+          //- img(src="https://res.cloudinary.com/dhpu1tojv/image/upload/v1676604535/logo_2_nuvd66.svg")
+          img(src="https://res.cloudinary.com/dhpu1tojv/image/upload/v1676604059/logo_3_m93mxg.svg")
+        //- q-toolbar-title 我不可愛
+        q-space
         .q-gutter-x-md
           q-btn(v-if="isLogin" @click="logout" icon='fa-solid fa-person-through-window' push round color="white" text-color="black")
           q-btn(v-if="!isAdmin" to="/Mycart" icon='fa-solid fa-cart-shopping' push round color="white" text-color="black")
@@ -37,3 +40,12 @@ const user = useUserStore()
 const { isLogin, isAdmin, ShowLogin, cart } = storeToRefs(user)
 const { logout } = user
 </script>
+
+<style lang="sass">
+#logo
+  width: 200px
+  height: 50px
+  img
+    width: 100%
+    object-fit: contain
+</style>

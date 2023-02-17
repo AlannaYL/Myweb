@@ -3,8 +3,8 @@
   h4.text-center.col-12 關於我們
   q-card.col-6.margin-auto
     q-form.q-pa-md(@submit="onSubmit")
-      q-input.q-mb-md(v-model="form.content" label="請輸入第一段內容" filled)
-      q-input(v-model="form.description" label="請輸入第二段內容" filled)
+      q-input.q-mb-md(v-model="form.content" type="textarea" label="請輸入第一段內容" filled)
+      q-input(v-model="form.description" type="textarea" label="請輸入第二段內容" filled)
       .row
         p 圖片預覽
         .col-12(v-for="img in abouts[form]?.images" :key="img")

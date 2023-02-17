@@ -5,17 +5,7 @@
       SwiperModal(v-bind="i")
   q-btn.scorll-btn(outline color="pink" icon="fa-solid fa-arrow-down") list
 #Section_02
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
-  h1 早安你好
+
 </template>
 <script setup>
 import { reactive } from 'vue'

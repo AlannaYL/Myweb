@@ -2,8 +2,10 @@
 #Menu
   .q-toolbar.row.items-center.justify-end
   #Navigation
-    #MenuLogo.col-3
-      h1 挖系LOGO
+    #MenuLogo.col-4
+      RouterLink(to="/")
+        img(src="https://res.cloudinary.com/dhpu1tojv/image/upload/v1676604059/logo_3_m93mxg.svg")
+        //- img(src="https://res.cloudinary.com/dhpu1tojv/image/upload/v1676604535/logo_2_nuvd66.svg")
     #MenuList.col-8
       .list
         .item

@@ -6,7 +6,7 @@
   .col-12
     q-table.item-center(:rows="filterData" :columns="columns" row-key="_id")
       template(v-slot:body-cell-image="props")
-        q-td
+        q-td(style="width: 200px")
           img(:src="props.row.image" style="height: 100px")
       template(v-slot:body-cell-sell="props")
         q-td
