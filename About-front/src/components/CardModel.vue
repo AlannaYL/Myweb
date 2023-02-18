@@ -3,7 +3,7 @@
 q-card(style="height: 280px")
   RouterLink(:to='"/Exhibitions/" + _id')
     q-img(:src="image")
-      div.text-h5.absolute-bottom.text-right.color-pink
+      div.text-h5.absolute-bottom.text-right
         p {{ title }}
         p {{ place }}
         p {{ new Date(from).toLocaleDateString() + '~' + new Date(to).toLocaleDateString() }}
