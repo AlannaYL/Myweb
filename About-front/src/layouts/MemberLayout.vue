@@ -38,4 +38,7 @@ const links = [
 .bg-color {
   background: $blue;
 }
+h6 {
+  margin: 0;
+}
 </style>
